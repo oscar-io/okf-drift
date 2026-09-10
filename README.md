@@ -7,7 +7,7 @@ thing it described moved, and nothing complained. `okf-drift` is the thing that
 complains.
 
 ```
-$ npx okf-drift index --check docs
+$ okf-drift index --check docs
 
   MISSING    design/index.md
              the catalogue describes caching.md but the document has no description
@@ -31,12 +31,36 @@ after week three. Run both.
 
 ## Install
 
+This is not on npm, [on purpose](docs/design/distribution.md). Install it from here.
+
+**As a command, anywhere:**
+
 ```bash
-npx okf-drift index --check docs     # no install
-pnpm add -D okf-drift                # or keep it in the project
+npm install -g github:oscar-io/okf-drift
+okf-drift index --check docs
 ```
 
-Node >= 20.
+**As a dependency of one project:**
+
+```bash
+npm install --save-dev github:oscar-io/okf-drift
+```
+
+```json
+{ "scripts": { "docs:check": "okf-drift index --check docs" } }
+```
+
+```bash
+npm run docs:check
+```
+
+**Once, without installing:**
+
+```bash
+npx github:oscar-io/okf-drift index --check docs
+```
+
+Node >= 20. The bundle it checks can be in a repository written in anything.
 
 ## Two oracles
 
@@ -75,7 +99,7 @@ documentation tool that deletes documentation deserves to be uninstalled.
 ## In CI
 
 ```yaml
-- run: npx okf-drift index --check docs
+- run: npx github:oscar-io/okf-drift index --check docs
 ```
 
 ## As a library
