@@ -37,7 +37,8 @@ export interface FrontMatter {
   status?: string
   stale_after?: string
   generated?: Actor
-  verified?: Actor[]
+  /** A list of events, or a bare mapping meaning a list of one (spec §5.2). */
+  verified?: Actor[] | Actor
   sources?: Source[]
   [key: string]: unknown
 }
@@ -108,11 +109,18 @@ export function trustTier(meta: FrontMatter): 'unverified' | 'machine-confirmed'
   return events.some((event) => event.by.startsWith('human:')) ? 'human-reviewed' : 'machine-confirmed'
 }
 
-/** `verified` entries that are shaped like an actor, ignoring malformed ones. */
+/**
+ * `verified` entries that are shaped like an actor, ignoring malformed ones.
+ *
+ * A bare mapping is one event, not a mistake: spec §5.2 permits a single
+ * verifier to be written without the list dash, and §11 makes treating it as a
+ * one-element list a MUST for consumers.
+ */
 export function verificationEvents(meta: FrontMatter): Actor[] {
   const verified = meta.verified
-  if (!Array.isArray(verified)) return []
-  return verified.filter(
+  if (verified === undefined || verified === null) return []
+  const events = Array.isArray(verified) ? verified : [verified]
+  return events.filter(
     (event): event is Actor => typeof event === 'object' && event !== null && isActor((event as Actor).by),
   )
 }
