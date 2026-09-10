@@ -15,8 +15,8 @@ Read this first, then the directory you need.
 
 1. [`design/language-choice.md`](design/language-choice.md) - why TypeScript, and what
    would reverse it.
-2. [`design/catalogue-generation.md`](design/catalogue-generation.md) - the rule the
-   `index` command implements.
+2. [`design/index-command.md`](design/index-command.md) - the rule the `index` command
+   implements, and the file it is not allowed to own.
 3. [`log.md`](log.md) - why any of it changed.
 
 ## Conventions

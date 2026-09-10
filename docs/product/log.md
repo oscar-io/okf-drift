@@ -4,11 +4,10 @@ Why the backlog changed. Newest first.
 
 ## 2026-09-10
 
-**Backlog started, as markdown in git rather than as issues.** Three tickets, all found
-by using the tool on this repository rather than by planning: a malformed `verified`
-block that vanishes silently (`DRIFT-0001`), the git oracle the tool is named after
-(`DRIFT-0002`), and an open question about whether a shorter catalogue summary counts as
-drift (`DRIFT-0003`).
-
-`DRIFT-0003` is deliberately undecided. The evidence needed to settle it is a bundle
-bigger than this one, and guessing now would fix the wrong answer in place.
+- **Creation** [DRIFT-0006](./tickets/DRIFT-0006.md) collects four ways the tool contradicts the
+  specification it enforces, found by reading the spec rather than its examples.
+- **Creation** [DRIFT-0004](./tickets/DRIFT-0004.md) and [DRIFT-0005](./tickets/DRIFT-0005.md)
+  defer configurable section names and table-shaped regeneration, both out of scope of the
+  section decision that created them.
+- **Creation** [tickets/](./tickets/index.md) starts the backlog with three tickets, all found by
+  using the tool on this repository rather than by planning.

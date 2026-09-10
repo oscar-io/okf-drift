@@ -9,7 +9,7 @@ implementation: "partial"
 generated: { by: claude-opus-5, at: 2026-09-10T22:25:00Z }
 sources:
   - id: decision
-    resource: /docs/design/catalogue-generation.md
+    resource: /docs/design/index-command.md
     title: "The decision this ticket would amend, including why formatting is already ignored"
     last_modified: 2026-09-10T22:16:00Z
 ---

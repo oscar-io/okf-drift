@@ -18,9 +18,10 @@ alternative, a constraint that is not obvious from the code — write it there.
 
 ## While you work
 
-- **`index.md` is generated. Never edit one by hand.** Run `pnpm docs:write` and commit
-  the result. The exception is `docs/index.md`, which is hand-written because the root
-  directory holds no documents of its own.
+- **An `index.md` may be edited by hand.** The tool assists; it does not own the file. It
+  regenerates the body of `## Documents` and `## Directories` and leaves everything else
+  alone, so prose, extra sections and a curated subset of the directory all survive. Run
+  `pnpm docs:write` when it saves typing, and edit directly when it does not.
 - **A `description` in front matter is the summary the catalogue quotes.** Write it as a
   fragment that completes "this document explains…", lowercase, no trailing full stop.
 - **Adding a dependency is a decision.** The runtime dependency is `yaml` and nothing
@@ -80,6 +81,24 @@ Rules that matter more than the rest:
 `log.md` records **why a document moved**, not that it changed — git already has that.
 An entry earns its place if a reader six months from now would otherwise repeat a
 mistake. A reversal is always worth an entry; a typo fix never is.
+
+The spec leaves the shape open. Write new entries this way, newest first, under an ISO
+`## YYYY-MM-DD` heading:
+
+```markdown
+- **Creation** [distribution.md](./distribution.md) drops npm publishing, and takes the
+  registry-reach argument away from [language-choice.md](./language-choice.md).
+```
+
+- **The action comes first**, bold: `Creation`, `Update`, `Deprecation`.
+- **Then the document, as a link.** A reader scanning the file is scanning for which
+  document moved, so it belongs in the opening clause rather than at the end.
+- **One sentence.** The test is mechanical: cut every entry at its first period and read
+  the file top to bottom. If a day still makes sense, the entries are the right shape. A
+  second sentence is earned only by a constraint on the next writer.
+
+This is a house style, not a rule the tool enforces, and a hand-written log that ignores
+it is still conformant.
 
 ## Style
 

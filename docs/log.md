@@ -1,39 +1,12 @@
 # update log
 
-Why the documents in this bundle moved. Newest first. Entries record decisions and
-reversals, not every edit — git already holds those.
+Why the documents in this bundle moved. Newest first.
 
 ## 2026-09-10
 
-**Added a backlog under [`product/tickets/`](product/tickets/index.md)**, and taught the
-catalogue check to read a table. The registry there is a table because a list of short
-rows reads badly as bullets, and the tool promptly reported all three tickets as missing:
-its parser only understood lists. Fixed by reading both shapes, and by using a table's
-`Description` header to decide which column to compare, so a `Title` column is never
-mistaken for a description.
-
-That is twice now the bundle has found a bug in the tool that checks it.
-
-**Inception.** Started as a catalogue generator. The premise: keeping `index.md` current
-by hand is the bookkeeping that kills wikis, and an agent can now be told to do it for
-free. Recorded in [`design/catalogue-generation.md`](design/catalogue-generation.md).
-
-**Decided TypeScript over Go and Python**, and wrote down what would reverse it, because
-this is the kind of choice that quietly becomes permanent when nobody records the
-alternative. [`design/language-choice.md`](design/language-choice.md).
-
-**Reported catalogue differences instead of only fixing them.** `--write` alone is a
-formatter; it cannot run in CI on a pull request and say what is wrong. Splitting
-`--check` from `--write` is what makes the tool useful to someone who has not adopted it
-yet.
-
-**Loosened the description comparison to ignore formatting.** Exact string equality
-flagged a hyphen and a capital letter as drift. A check that reports noise gets switched
-off, so the comparison now normalises first and `--strict` keeps the old behaviour for
-anyone who wants it.
-
-**Stopped `--write` deleting prose.** A document with no `description` in its front
-matter caused regeneration to silently drop a hand-written summary from the catalogue.
-Found by asking what happens when an optional field is missing, before running the tool
-on this bundle — which would have eaten these descriptions as they were written. The
-rule is now that a description already in the catalogue survives.
+- **Creation** [product/tickets/](./product/tickets/index.md) holds the backlog as markdown in
+  git, so an idea can be cited by id before any pull request exists.
+- **Update** the catalogue check reads tables as well as lists, because the ticket registry is a
+  table and the tool reported every row as missing.
+- **Inception** a catalogue generator, on the premise that keeping `index.md` current by hand is
+  the bookkeeping that kills wikis.

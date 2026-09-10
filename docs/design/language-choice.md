@@ -6,8 +6,7 @@ description: "why a tool that should not care what language a project uses is wr
 tags: [decision, tooling, distribution]
 status: "stable"
 generated: { by: claude-opus-5, at: 2026-09-10T22:15:54Z }
-verified:
-  - { by: "human:oscar-io", at: 2026-09-10T22:18:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-10T22:18:00Z }
 sources:
   - id: package
     resource: /package.json
@@ -34,6 +33,10 @@ makes this findable by anyone already searching the term, and lets the README st
 difference in one line: *okf-kit validates that a bundle is well formed, okf-drift tells
 you when a well-formed bundle has stopped being true.* A Go binary is invisible to that
 search.
+
+That second reason was later given up: [`distribution.md`](distribution.md) decides not
+to publish, so the tool is not findable in the registry at all. The decision below
+stands on trial friction and audience alone.
 
 **Performance is irrelevant here**, which removes Go's usual advantage. The work is
 `git log` over a few dozen markdown files: I/O bound, and over in milliseconds.
