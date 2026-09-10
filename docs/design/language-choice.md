@@ -6,6 +6,8 @@ description: "why a tool that should not care what language a project uses is wr
 tags: [decision, tooling, distribution]
 status: "stable"
 generated: { by: claude-opus-5, at: 2026-09-10T22:15:54Z }
+verified:
+  - { by: "human:oscarryz", at: 2026-09-10T22:18:00Z }
 sources:
   - id: package
     resource: /package.json
