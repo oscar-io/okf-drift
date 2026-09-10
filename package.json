@@ -1,0 +1,54 @@
+{
+  "name": "okf-drift",
+  "version": "0.1.0",
+  "description": "Tells you when an OKF knowledge bundle has stopped being true: catalogues that no longer match their documents, and documents that no longer match the code they describe.",
+  "keywords": [
+    "okf",
+    "open-knowledge-format",
+    "documentation",
+    "drift",
+    "agent",
+    "ai",
+    "knowledge"
+  ],
+  "homepage": "https://github.com/oscar-io/okf-drift#readme",
+  "bugs": "https://github.com/oscar-io/okf-drift/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oscar-io/okf-drift.git"
+  },
+  "license": "MIT",
+  "author": "Oscar Reyes",
+  "type": "module",
+  "bin": {
+    "okf-drift": "dist/cli.js"
+  },
+  "exports": {
+    ".": "./dist/api.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "tsx src/cli.ts",
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "type-check": "tsc --noEmit",
+    "docs:check": "tsx src/cli.ts index --check docs",
+    "docs:write": "tsx src/cli.ts index --write docs",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "yaml": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}
