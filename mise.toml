@@ -1,4 +1,6 @@
+# Local development runs ahead of the supported range on purpose: package.json
+# claims Node >= 20 and CI proves it on 20, 22 and 24. Developing on the newest
+# release is how a break in the next one is found early.
 [tools]
 node = "25.9.0"
-npm = "10.8.3"
-pnpm = "latest"
+pnpm = "10"
