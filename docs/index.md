@@ -9,6 +9,7 @@ Read this first, then the directory you need.
 ## Directories
 
 - [`design/`](design/index.md) - decisions about how the tool works, and what was rejected.
+- [`product/tickets/`](product/tickets/index.md) - the backlog, one file per idea, with a stable id.
 
 ## Reading order for a newcomer
 

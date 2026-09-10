@@ -11,24 +11,70 @@ import { join } from 'node:path'
 import type { Bundle, BundleDirectory, Concept } from './bundle.js'
 import type { Finding } from './report.js'
 
-/** A line in a catalogue: `- [`file.md`](file.md) - description.` */
-const ENTRY = /^\s*[-*]\s*\[`?([^\]`]+?)`?\]\(([^)]+)\)\s*(?:[-—:]\s*(.*))?$/
+/** A list entry: `- [`file.md`](file.md) - description.` */
+const LIST_ENTRY = /^\s*[-*]\s*\[`?([^\]`]+?)`?\]\(([^)]+)\)\s*(?:[-—:]\s*(.*))?$/
+
+/** A table row: `| [`file.md`](file.md) | description | ... |`, any column count. */
+const TABLE_ROW = /^\s*\|(.+)\|\s*$/
+const TABLE_LINK = /\[`?([^\]`]+?)`?\]\(([^)]+)\)/
 
 export interface CatalogueEntry {
   target: string
   description: string
 }
 
+function isListing(target: string): boolean {
+  if (!target) return false
+  if (/^[a-z][a-z0-9+.-]*:/i.test(target)) return false // an external link
+  if (target === 'log.md' || target === 'index.md') return false // navigation, not a listing
+  return true
+}
+
+/**
+ * Read the documents a catalogue claims are in its directory.
+ *
+ * Both a bullet list and a table count, because a registry of many short rows
+ * reads better as a table and a catalogue that only understood one shape would
+ * quietly report every row of the other as missing. Found by writing exactly
+ * that: see the log for 2026-09-10.
+ */
 export function parseCatalogue(text: string): CatalogueEntry[] {
   const entries: CatalogueEntry[] = []
+
+  // Which table column, if any, holds a description. A registry table often has
+  // no such column: `| Id | Title | Implementation |` describes nothing, and
+  // comparing a title against a description would report drift between two
+  // fields that were never meant to agree.
+  let descriptionColumn = -1
+
   for (const line of text.split(/\r?\n/)) {
-    const match = ENTRY.exec(line)
-    if (!match) continue
-    const target = (match[2] ?? '').trim()
-    if (!target || /^[a-z][a-z0-9+.-]*:/i.test(target)) continue // skip external links
-    if (target === 'log.md' || target === 'index.md') continue // navigation, not a listing
-    entries.push({ target, description: (match[3] ?? '').trim().replace(/\.$/, '') })
+    const list = LIST_ENTRY.exec(line)
+    if (list) {
+      const target = (list[2] ?? '').trim()
+      if (!isListing(target)) continue
+      entries.push({ target, description: (list[3] ?? '').trim().replace(/\.$/, '') })
+      continue
+    }
+
+    const row = TABLE_ROW.exec(line)
+    if (!row) continue
+    const cells = (row[1] ?? '').split('|').map((cell) => cell.trim())
+
+    const linked = cells.findIndex((cell) => TABLE_LINK.test(cell))
+    if (linked === -1) {
+      const header = cells.findIndex((cell) => /^description$/i.test(cell))
+      if (header !== -1) descriptionColumn = header
+      continue
+    }
+
+    const link = TABLE_LINK.exec(cells[linked] ?? '')
+    const target = (link?.[2] ?? '').trim()
+    if (!isListing(target)) continue
+
+    const description = descriptionColumn === -1 ? '' : (cells[descriptionColumn] ?? '')
+    entries.push({ target, description: description.replace(/\.$/, '') })
   }
+
   return entries
 }
 

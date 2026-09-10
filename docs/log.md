@@ -5,6 +5,15 @@ reversals, not every edit — git already holds those.
 
 ## 2026-09-10
 
+**Added a backlog under [`product/tickets/`](product/tickets/index.md)**, and taught the
+catalogue check to read a table. The registry there is a table because a list of short
+rows reads badly as bullets, and the tool promptly reported all three tickets as missing:
+its parser only understood lists. Fixed by reading both shapes, and by using a table's
+`Description` header to decide which column to compare, so a `Title` column is never
+mistaken for a description.
+
+That is twice now the bundle has found a bug in the tool that checks it.
+
 **Inception.** Started as a catalogue generator. The premise: keeping `index.md` current
 by hand is the bookkeeping that kills wikis, and an agent can now be told to do it for
 free. Recorded in [`design/catalogue-generation.md`](design/catalogue-generation.md).

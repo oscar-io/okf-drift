@@ -67,6 +67,16 @@ describe('checkIndexes', () => {
     expect(result.checked).toBe(1)
   })
 
+  it('accepts a catalogue written as a table', () => {
+    concept('design/caching.md', 'why prices are cached per-tenant')
+    file(
+      'design/index.md',
+      '# design: index\n\n| Id | Title |\n|---|---|\n| [`caching.md`](caching.md) | Caching |\n',
+    )
+
+    expect(checkIndexes(readBundle(root)).findings).toEqual([])
+  })
+
   it('reports a document that exists but is not catalogued', () => {
     concept('design/caching.md', 'why prices are cached per-tenant')
     concept('design/auth.md', 'how identity is carried')
@@ -121,6 +131,53 @@ describe('checkIndexes', () => {
     concept('design/caching.md', 'why prices are cached per-tenant')
     const codes = checkIndexes(readBundle(root)).findings.map((f) => f.code)
     expect(codes).toContain('unreadable')
+  })
+})
+
+describe('parseCatalogue, table form', () => {
+  it('reads a registry table that has no description column', () => {
+    // `| Id | Title | Implementation |` describes nothing: a title is not a
+    // description, and comparing them would report drift between two fields
+    // that were never meant to agree.
+    const entries = parseCatalogue(
+      [
+        '| Id | Title | Implementation |',
+        '|---|---|---|',
+        '| [`DRIFT-0001`](DRIFT-0001.md) | Report a malformed verified block | proposed |',
+        '| [`DRIFT-0002`](DRIFT-0002.md) | The git oracle | partial |',
+      ].join('\n'),
+    )
+    expect(entries).toEqual([
+      { target: 'DRIFT-0001.md', description: '' },
+      { target: 'DRIFT-0002.md', description: '' },
+    ])
+  })
+
+  it('uses the description column when the table has one', () => {
+    const entries = parseCatalogue(
+      [
+        '| Document | Description | Status |',
+        '|---|---|---|',
+        '| [`caching.md`](caching.md) | why prices are cached per-tenant. | stable |',
+      ].join('\n'),
+    )
+    expect(entries).toEqual([{ target: 'caching.md', description: 'why prices are cached per-tenant' }])
+  })
+
+  it('reads lists and tables in the same document', () => {
+    const entries = parseCatalogue(
+      ['- [`a.md`](a.md) - first.', '', '| Id | Title |', '|---|---|', '| [`b.md`](b.md) | second |'].join('\n'),
+    )
+    expect(entries.map((e) => e.target)).toEqual(['a.md', 'b.md'])
+  })
+
+  it('ignores navigation and external links in a table', () => {
+    const entries = parseCatalogue(
+      ['| Link | Note |', '|---|---|', '| [`log.md`](log.md) | history |', '| [spec](https://example.com) | ext |'].join(
+        '\n',
+      ),
+    )
+    expect(entries).toEqual([])
   })
 })
 
