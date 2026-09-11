@@ -1,9 +1,9 @@
 ---
 # OKF v0.2
 type: "Reference"
-title: "Keeping a bundle current while an agent works in it"
-description: "which files change when a document is created, delivered, superseded or deleted, and what the tool checks at each point"
-tags: [reference, workflow, agent, index, log]
+title: "The lifecycle an agent should follow in this bundle"
+description: "the workflow to follow when a document is created, a ticket delivered or a plan completed, and which files to update each time"
+tags: [ reference, workflow, agent, index, log ]
 status: "stable"
 generated: { by: pi/opus-5, at: 2026-09-11T01:14:21Z }
 sources:
@@ -21,12 +21,13 @@ sources:
 
 # Keeping a bundle current while an agent works in it
 
-An OKF bundle is only useful to the next session if it is true when this one ends. That is
-mechanical work — an index entry, a log line, a status flag — and mechanical work is
-exactly what an agent should absorb.
+**Follow this.** An OKF bundle is only useful to the next session if it is true when this
+one ends, and keeping it true is mechanical work — an index entry, a log line, a status
+flag. Mechanical work is exactly what an agent should absorb.
 
-This is what changes, and when. Each event lists the files to touch; the check at the end
-of every one is the same.
+Each event below lists the files to update. The check at the end of every one is the same.
+When in doubt about whether something is worth recording, the test is always the next
+reader, never the size of the change.
 
 ## The events
 
@@ -114,10 +115,10 @@ remembered.
 
 ## What the tool enforces, and what it cannot
 
-| | |
-|---|---|
-| **Enforced** | index entries, descriptions matching front matter, cited files existing, cited code changing after a document was written or reviewed, `stale_after`, unreadable trust claims |
-| **Not enforced** | whether a log entry was earned, whether a decision names its alternatives, whether `status.md` is honest, whether a plan was deleted |
+|                  |                                                                                                                                                                               |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Enforced**     | index entries, descriptions matching front matter, cited files existing, cited code changing after a document was written or reviewed, `stale_after`, unreadable trust claims |
+| **Not enforced** | whether a log entry was earned, whether a decision names its alternatives, whether `status.md` is honest, whether a plan was deleted                                          |
 
 The second column is the interesting half, which is why it is written down rather than
 automated. A check that cannot fail teaches nothing.

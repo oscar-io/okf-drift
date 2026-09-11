@@ -4,7 +4,7 @@ What changed in any of these is in [`log.md`](log.md).
 
 ## Documents
 
-- [`bundle-workflow.md`](bundle-workflow.md) - which files change when a document is created, delivered, superseded or deleted, and what the tool checks at each point.
+- [`bundle-workflow.md`](bundle-workflow.md) - the workflow to follow when a document is created, a ticket delivered or a plan completed, and which files to update each time.
 
 ## Directories
 

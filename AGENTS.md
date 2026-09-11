@@ -16,6 +16,12 @@ alternative, a constraint that is not obvious from the code — write it there.
   `docs/design/log.md` record why things are the way they are, which is the part the
   code cannot tell you.
 
+## Working in the bundle
+
+**Follow [`docs/product/bundle-workflow.md`](docs/product/bundle-workflow.md).** It says
+which files to update when a document is created, a ticket delivered or a plan completed.
+Most of the mistakes made here were skipped steps in it.
+
 ## Writing a document
 
 **Read [`docs/design/authoring-guide.md`](docs/design/authoring-guide.md).** It is the

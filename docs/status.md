@@ -3,7 +3,7 @@
 type: "Document Authority"
 title: "Documentation status and authority"
 description: "which documents describe what the tool does today, which describe intentions, and which behaviour is built versus planned"
-tags: [documentation, governance, status]
+tags: [ documentation, governance, status ]
 status: "stable"
 generated: { by: pi/opus-5, at: 2026-09-11T00:35:00Z }
 verified: { by: "human:oscar-io", at: 2026-09-11T00:40:00Z }
@@ -23,8 +23,7 @@ What a document here is allowed to claim. A document's own `status` and
 `implementation` win over its folder name; where a document and this register disagree,
 the document is right and this file is stale.
 
-It answers *what is true today*. For *what exists here* see [`index.md`](index.md); for
-*why anything moved* see the `log.md` in each directory.
+It answers *what is true today*. For *what exists here* see [`index.md`](index.md); for *why anything moved* see the `log.md` in each directory.
 
 ## Built and true today (`normative/current`)
 
@@ -32,10 +31,10 @@ These describe behaviour you can run.
 
 - [`../README.md`](../README.md) — how to install and run the tool; every command in it works.
 - [`../AGENTS.md`](../AGENTS.md) — the working contract for this repository.
-- [`product/bundle-workflow.md`](product/bundle-workflow.md) — every event it describes was
-  performed in this repository; the table of what is and is not enforced is accurate.
-- [`design/authoring-guide.md`](design/authoring-guide.md) — house style; the rules marked
-  **enforced** are genuinely enforced, the rest are convention and nothing checks them.
+- [`product/bundle-workflow.md`](product/bundle-workflow.md) — normative: the lifecycle an
+  agent is expected to follow here. Every event in it has been performed in this
+  repository, and the table of what is and is not enforced is accurate.
+- [`design/authoring-guide.md`](design/authoring-guide.md) — house style; the rules marked **enforced** are genuinely enforced, the rest are convention and nothing checks them.
 - [`design/index-command.md`](design/index-command.md) — fully implemented, including
   section-scoped `--write` and its refusals.
 - [`design/language-choice.md`](design/language-choice.md) — decided and acted on.
@@ -73,13 +72,13 @@ These are directions. Nothing in them describes current behaviour.
 
 ## What the tool does today
 
-| Command | State |
-|---|---|
-| `okf-drift index --check <bundle>` | works |
-| `okf-drift index --write <bundle>` | works; refuses what it cannot reproduce |
-| `okf-drift index --strict` | works |
-| `okf-drift check <bundle>` (the default) | works |
-| `okf-drift check --require-git` | works |
+| Command                                  | State                                   |
+|------------------------------------------|-----------------------------------------|
+| `okf-drift index --check <bundle>`       | works                                   |
+| `okf-drift index --write <bundle>`       | works; refuses what it cannot reproduce |
+| `okf-drift index --strict`               | works                                   |
+| `okf-drift check <bundle>` (the default) | works                                   |
+| `okf-drift check --require-git`          | works                                   |
 
 Findings emitted today: `unlisted-document`, `dangling-entry`, `description-drift`,
 `undescribed-document`, `invalid-description`, `no-index`, `unreadable`, `write-refused`,

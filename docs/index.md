@@ -27,7 +27,7 @@ Read this first, then the directory you need.
 4. [`status.md`](status.md) - what is built and what is only intended.
 5. [`log.md`](log.md) - why any of it changed.
 
-Then, if you are working in the bundle rather than on the tool:
+If you are working in the bundle rather than on the tool, follow
 [`product/bundle-workflow.md`](product/bundle-workflow.md).
 
 ## Conventions

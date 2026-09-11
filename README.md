@@ -33,20 +33,6 @@ npm install -g github:oscar-io/okf-drift
 okf-drift index --check docs
 ```
 
-**As a dependency of one project:**
-
-```bash
-npm install --save-dev github:oscar-io/okf-drift
-```
-
-```json
-{ "scripts": { "docs:check": "okf-drift index --check docs" } }
-```
-
-```bash
-npm run docs:check
-```
-
 **Once, without installing:**
 
 ```bash
@@ -60,10 +46,10 @@ Node >= 20. The bundle it checks can be in a repository written in anything.
 A document is checked against something that is known to be current. There are two such
 things, and each is a command:
 
-| Command | Compares | Against |
-|---|---|---|
+| Command           | Compares                | Against                   |
+|-------------------|-------------------------|---------------------------|
 | `okf-drift index` | catalogues (`index.md`) | the documents beside them |
-| `okf-drift check` | documents | the code, via git history |
+| `okf-drift check` | documents               | the code, via git history |
 
 ### `okf-drift check`
 
@@ -81,13 +67,13 @@ $ okf-drift check docs
   13 sources compared against git history.
 ```
 
-| Finding | Means |
-|---|---|
-| `stale-source` | cited code changed after `sources[].last_modified` |
-| `unverified-since-change` | cited code changed after the newest `verified.at` |
-| `missing-source` | a cited file is gone |
-| `expired` | `stale_after` is in the past |
-| `malformed-trust` | a `verified`, `generated` or `last_modified` the tool cannot read |
+| Finding                   | Means                                                             |
+|---------------------------|-------------------------------------------------------------------|
+| `stale-source`            | cited code changed after `sources[].last_modified`                |
+| `unverified-since-change` | cited code changed after the newest `verified.at`                 |
+| `missing-source`          | a cited file is gone                                              |
+| `expired`                 | `stale_after` is in the past                                      |
+| `malformed-trust`         | a `verified`, `generated` or `last_modified` the tool cannot read |
 
 A document reviewed *after* the code changed is not stale, so re-reading one and adding a
 `verified` entry silences it honestly.
@@ -109,14 +95,14 @@ okf-drift index --write docs     # regenerate the catalogues
 okf-drift index --strict docs    # compare descriptions exactly
 ```
 
-| Finding | Means |
-|---|---|
-| `unlisted-document` | the document exists and the catalogue does not mention it |
-| `dangling-entry` | the catalogue lists something that is not there |
-| `description-drift` | the catalogue describes it differently from its own front matter |
-| `undescribed-document` | the catalogue has a description and the document does not |
-| `invalid-description` | `description` is present but is not a string |
-| `no-index` | the directory has documents and no catalogue |
+| Finding                | Means                                                            |
+|------------------------|------------------------------------------------------------------|
+| `unlisted-document`    | the document exists and the catalogue does not mention it        |
+| `dangling-entry`       | the catalogue lists something that is not there                  |
+| `description-drift`    | the catalogue describes it differently from its own front matter |
+| `undescribed-document` | the catalogue has a description and the document does not        |
+| `invalid-description`  | `description` is present but is not a string                     |
+| `no-index`             | the directory has documents and no catalogue                     |
 
 Formatting is not drift: case, punctuation and whitespace are ignored unless you pass
 `--strict`. And `--write` never deletes a description it cannot derive, because a
@@ -128,18 +114,9 @@ documentation tool that deletes documentation deserves to be uninstalled.
 - run: npx github:oscar-io/okf-drift index --check docs
 ```
 
-## As a library
+# This repository is the example
 
-```ts
-import { readBundle, checkIndexes } from 'okf-drift'
-
-const { findings } = checkIndexes(readBundle('docs'))
-for (const f of findings) console.log(f.code, f.id, f.message)
-```
-
-## This repository is the example
-
-`docs/` here is a real OKF bundle describing the tool in `src/`, and CI runs the tool
+`docs/` here is a real OKF bundle describing the tool in `src/` itself, and CI runs the tool
 against it on every push. If you want to see the layout rather than read about it, start
 at [`docs/index.md`](docs/index.md) — and
 [`docs/log.md`](docs/log.md) is where the format earns its keep, because it records
