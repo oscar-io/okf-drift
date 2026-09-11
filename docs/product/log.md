@@ -4,6 +4,9 @@ Why the backlog changed. Newest first.
 
 ## 2026-09-11
 
+- **Update** every ticket takes a `Topic: assertion` title, matching the convention adopted
+  in [design](../design/log.md) for the same reason.
+
 - **Creation** [DRIFT-0009](./tickets/DRIFT-0009.md) records that renaming a field across the
   bundle marked six documents stale, because the check counts commits and a commit is a unit
   of authoring rather than of meaning.

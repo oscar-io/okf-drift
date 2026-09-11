@@ -4,6 +4,10 @@ Why the decisions in this directory changed. Newest first.
 
 ## 2026-09-11
 
+- **Update** every decision here takes a `Topic: assertion` title, because one read on its
+  own named a conclusion without its subject and the filename that supplied it is not a
+  field any consumer promises to show.
+
 - **Update** [authoring-guide.md](./authoring-guide.md) corrects its own actor example: it
   offered a bare model name under a heading reading `tool/version`, and thirteen documents
   copied it.

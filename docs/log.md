@@ -4,6 +4,8 @@ Why the documents in this bundle moved. Newest first.
 
 ## 2026-09-11
 
+- **Update** [status.md](./status.md) takes a front matter title that names its subject, in
+  step with the rest of the bundle.
 
 - **Creation** [status.md](./status.md) records which documents describe built behaviour and
   which describe intentions, because a ticket's status was the only place that said so.
