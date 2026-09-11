@@ -1,12 +1,12 @@
 ---
 # OKF v0.2
 type: "Design Decision"
-title: "What the tool does when it cannot check"
+title: "Drift Detection: what the tool does when it cannot check"
 description: "why an unverifiable source is announced rather than passed or failed, and why git is one oracle rather than the oracle"
 tags: [ decision, drift, git, safety ]
 status: "stable"
 generated: { by: pi/opus-5, at: 2026-09-11T00:45:00Z }
-verified: { by: "human:oscar-io", at: 2026-09-11T01:08:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T06:25:45Z }
 sources:
   - id: git
     resource: /src/git.ts
@@ -17,7 +17,7 @@ sources:
     title: "The checks this decision governs"
 ---
 
-# What the tool does when it cannot check
+# Drift Detection: what the tool does when it cannot check
 
 ## Decision
 

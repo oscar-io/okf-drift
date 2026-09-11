@@ -1,13 +1,13 @@
 ---
 # OKF v0.2
 type: "Feature Idea"
-title: "Regenerate a section in the shape it already has"
+title: "Index Generation: regenerate a section in the shape it already has"
 description: "keep a table a table, instead of replacing it with bullets"
 tags: [ backlog, feature-idea, index ]
 status: "draft"
 implementation: "proposed"
 generated: { by: pi/opus-5, at: 2026-09-10T23:10:00Z }
-verified: { by: "human:oscar-io", at: 2026-09-11T01:52:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T06:25:45Z }
 sources:
   - id: renderer
     resource: /src/index-cmd.ts
@@ -15,7 +15,7 @@ sources:
     last_modified: 2026-09-10T22:37:02Z
 ---
 
-# Regenerate a section in the shape it already has
+# Index Generation: regenerate a section in the shape it already has
 
 `DRIFT-0005`
 

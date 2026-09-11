@@ -1,12 +1,12 @@
 ---
 # OKF v0.2
 type: "Design Decision"
-title: "How the index command reads and writes a catalogue"
+title: "The Index Command: how a catalogue is read, and when it is written"
 description: "why a catalogue is checked rather than owned, and why generation touches two sections and nothing else"
 tags: [ decision, index, safety ]
 status: "stable"
 generated: { by: pi/opus-5, at: 2026-09-10T23:20:00Z }
-verified: { by: "human:oscar-io", at: 2026-09-10T23:49:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T06:25:45Z }
 sources:
   - id: implementation
     resource: /src/index-cmd.ts
@@ -22,7 +22,7 @@ sources:
     author: GoogleCloudPlatform/knowledge-catalog
 ---
 
-# How the index command reads and writes a catalogue
+# The Index Command: how a catalogue is read, and when it is written
 
 ## Decision
 

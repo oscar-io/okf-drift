@@ -1,13 +1,13 @@
 ---
 # OKF v0.2
 type: "Feature Idea"
-title: "Conform to the spec's link and index rules"
+title: "Spec Conformance: obey the link and index rules the tool enforces"
 description: "four ways the index check contradicted OKF v0.2, found by reading the spec instead of the examples"
 tags: [ backlog, feature-idea, conformance, index ]
 status: "stable"
 implementation: "done"
 generated: { by: pi/opus-5, at: 2026-09-11T00:12:00Z }
-verified: { by: "human:oscar-io", at: 2026-09-11T01:52:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T06:25:45Z }
 sources:
   - id: spec
     resource: https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md
@@ -19,7 +19,7 @@ sources:
     last_modified: 2026-09-11T00:00:43Z
 ---
 
-# Conform to the spec's link and index rules
+# Spec Conformance: obey the link and index rules the tool enforces
 
 `DRIFT-0006`
 

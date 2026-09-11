@@ -1,13 +1,13 @@
 ---
 # OKF v0.2
 type: "Feature Idea"
-title: "Separate house rules from conformance failures"
+title: "Findings: separate house rules from conformance failures"
 description: "the tool fails a bundle the spec explicitly permits, and nothing in its output says which findings are its own opinion"
 tags: [ backlog, feature-idea, conformance, findings ]
 status: "draft"
 implementation: "proposed"
 generated: { by: pi/opus-5, at: 2026-09-11T01:45:00Z }
-verified: { by: "human:oscar-io", at: 2026-09-11T01:52:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T06:25:45Z }
 sources:
    - id: spec
      resource: https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md
@@ -19,7 +19,7 @@ sources:
      last_modified: 2026-09-11T00:29:00Z
 ---
 
-# Separate house rules from conformance failures
+# Findings: separate house rules from conformance failures
 
 `DRIFT-0007`
 

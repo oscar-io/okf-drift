@@ -1,20 +1,20 @@
 ---
 # OKF v0.2
 type: "Feature Idea"
-title: "Configurable index section headings"
+title: "Index Sections: configurable headings"
 description: "let a bundle name the sections the tool may regenerate, instead of hardcoding two"
 tags: [ backlog, feature-idea, index ]
 status: "draft"
 implementation: "proposed"
 generated: { by: pi/opus-5, at: 2026-09-10T23:10:00Z }
-verified: { by: "human:oscar-io", at: 2026-09-11T01:52:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T06:25:45Z }
 sources:
   - id: decision
     resource: /docs/design/index-command.md
     title: "The decision that hardcodes the two headings this ticket would make configurable"
 ---
 
-# Configurable index section headings
+# Index Sections: configurable headings
 
 `DRIFT-0004`
 

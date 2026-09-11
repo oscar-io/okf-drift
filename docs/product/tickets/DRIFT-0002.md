@@ -1,13 +1,13 @@
 ---
 # OKF v0.2
 type: "Feature Idea"
-title: "The git oracle"
+title: "Drift Detection: the git oracle"
 description: "compare a document against the code it cites, using history that already exists"
 tags: [ backlog, feature-idea, drift, git ]
 status: "stable"
 implementation: "done"
 generated: { by: pi/opus-5, at: 2026-09-10T22:25:00Z }
-verified: { by: "human:oscar-io", at: 2026-09-11T01:52:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T06:25:45Z }
 sources:
   - id: stub
     resource: /src/drift.ts
@@ -15,7 +15,7 @@ sources:
     last_modified: 2026-09-10T22:10:06Z
 ---
 
-# The git oracle
+# Drift Detection: the git oracle
 
 `DRIFT-0002`
 

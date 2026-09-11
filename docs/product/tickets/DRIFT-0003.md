@@ -1,13 +1,13 @@
 ---
 # OKF v0.2
 type: "Feature Idea"
-title: "Decide whether a terser catalogue summary is drift"
+title: "Catalogue Summaries: decide whether a terser description is drift"
 description: "whether a deliberately shorter description in an index is good editing or a copy that has rotted"
 tags: [ backlog, feature-idea, index, open-question ]
 status: "draft"
 implementation: "partial"
 generated: { by: pi/opus-5, at: 2026-09-10T22:25:00Z }
-verified: { by: "human:oscar-io", at: 2026-09-11T01:52:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T06:25:45Z }
 sources:
   - id: decision
     resource: /docs/design/index-command.md
@@ -15,7 +15,7 @@ sources:
     last_modified: 2026-09-10T22:16:00Z
 ---
 
-# Decide whether a terser catalogue summary is drift
+# Catalogue Summaries: decide whether a terser description is drift
 
 `DRIFT-0003`
 

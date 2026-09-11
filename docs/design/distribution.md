@@ -1,12 +1,12 @@
 ---
 # OKF v0.2
 type: "Design Decision"
-title: "Installed from git, not published to npm"
+title: "Tool Distribution: installed from git, not published to npm"
 description: "why the tool is a global command you install from the repository rather than a package in the public registry"
 tags: [ decision, distribution, npm ]
 status: "stable"
 generated: { by: pi/opus-5, at: 2026-09-10T22:50:00Z }
-verified: { by: "human:oscar-io", at: 2026-09-10T23:54:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T06:25:45Z }
 sources:
   - id: manifest
     resource: /package.json
@@ -18,7 +18,7 @@ sources:
     last_modified: 2026-09-10T22:37:02Z
 ---
 
-# Installed from git, not published to npm
+# Tool Distribution: installed from git, not published to npm
 
 ## Decision
 

@@ -1,13 +1,13 @@
 ---
 # OKF v0.2
 type: "Feature Idea"
-title: "Report a malformed verified block"
+title: "Trust Claims: report a malformed verified block"
 description: "front matter that looks verified to a reader and parses as nothing to the code should be a finding, not silence"
 tags: [ backlog, feature-idea, front-matter, trust ]
 status: "stable"
 implementation: "done"
 generated: { by: pi/opus-5, at: 2026-09-10T22:25:00Z }
-verified: { by: "human:oscar-io", at: 2026-09-11T01:52:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T06:25:45Z }
 sources:
   - id: helpers
     resource: /src/frontmatter.ts
@@ -15,7 +15,7 @@ sources:
     last_modified: 2026-09-10T22:10:06Z
 ---
 
-# Report a malformed verified block
+# Trust Claims: report a malformed verified block
 
 `DRIFT-0001`
 

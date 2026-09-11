@@ -1,13 +1,13 @@
 ---
 # OKF v0.2
 type: "Feature Idea"
-title: "Adoption belongs to a different tool"
+title: "Bundle Adoption: a job for a different tool"
 description: "why helping a folder of markdown become a bundle is out of scope here, and what the tool that does it looks like"
 tags: [ backlog, feature-idea, adoption, scope, rejected ]
 status: "draft"
 implementation: "rejected"
 generated: { by: pi/opus-5, at: 2026-09-11T01:49:29Z }
-verified: { by: "human:oscar-io", at: 2026-09-11T01:52:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T06:25:45Z }
 sources:
   - id: walker
     resource: /src/bundle.ts
@@ -19,7 +19,7 @@ sources:
     author: GoogleCloudPlatform/knowledge-catalog
 ---
 
-# Adoption belongs to a different tool
+# Bundle Adoption: a job for a different tool
 
 `DRIFT-0008`
 

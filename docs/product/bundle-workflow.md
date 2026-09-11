@@ -1,12 +1,12 @@
 ---
 # OKF v0.2
 type: "Reference"
-title: "The lifecycle an agent should follow in this bundle"
+title: "Bundle Workflow: the lifecycle an agent should follow here"
 description: "the workflow this repository follows when a document is created, a ticket delivered or a plan completed, and which files to update each time"
 tags: [ reference, workflow, agent, index, log ]
 status: "stable"
 generated: { by: pi/opus-5, at: 2026-09-11T01:14:21Z }
-verified: { by: "human:oscar-io", at: 2026-09-11T01:52:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T06:25:45Z }
 sources:
   - id: guide
     resource: /docs/design/authoring-guide.md
@@ -20,7 +20,7 @@ sources:
     last_modified: 2026-09-11T00:29:00Z
 ---
 
-# The lifecycle an agent should follow in this bundle
+# Bundle Workflow: the lifecycle an agent should follow here
 
 **Follow this, here.** An OKF bundle is only useful to the next session if it is true when
 this one ends, and keeping it true is mechanical work — an index entry, a log line, a

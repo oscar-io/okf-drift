@@ -1,12 +1,12 @@
 ---
 # OKF v0.2
 type: "Design Decision"
-title: "TypeScript, over Go and Python"
+title: "Language Selection: TypeScript, over Go and Python"
 description: "why a tool that should not care what language a project uses is written in TypeScript anyway"
 tags: [ decision, tooling, distribution ]
 status: "stable"
 generated: { by: pi/opus-5, at: 2026-09-10T22:15:54Z }
-verified: { by: "human:oscar-io", at: 2026-09-10T22:18:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T06:25:45Z }
 sources:
   - id: package
     resource: /package.json
@@ -14,7 +14,7 @@ sources:
     last_modified: 2026-09-10T22:10:06Z
 ---
 
-# TypeScript, over Go and Python
+# Language Selection: TypeScript, over Go and Python
 
 ## Decision
 

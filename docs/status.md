@@ -1,12 +1,12 @@
 ---
 # OKF v0.2
 type: "Document Authority"
-title: "Documentation status and authority"
+title: "Documentation Status: what each document here is allowed to claim"
 description: "which documents describe what the tool does today, which describe intentions, and which behaviour is built versus planned"
 tags: [ documentation, governance, status ]
 status: "stable"
 generated: { by: pi/opus-5, at: 2026-09-11T00:35:00Z }
-verified: { by: "human:oscar-io", at: 2026-09-11T02:40:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T06:25:45Z }
 sources:
   - id: cli
     resource: /src/cli.ts
@@ -17,7 +17,7 @@ sources:
     title: "The ticket registry, whose implementation column this must agree with"
 ---
 
-# Documentation status and authority
+# Documentation Status: what each document here is allowed to claim
 
 What a document here is allowed to claim. A document's own `status` and
 `implementation` win over its folder name; where a document and this register disagree,

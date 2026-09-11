@@ -1,7 +1,7 @@
 ---
 # OKF v0.2
 type: "Feature Idea"
-title: "A commit is not evidence that a source changed"
+title: "Staleness Signals: a commit is not evidence that a source changed"
 description: "why renaming a field across the bundle marked six documents stale, and what a cheaper signal than a commit count would be"
 tags: [ backlog, feature-idea, drift, noise ]
 status: "draft"
@@ -18,7 +18,7 @@ sources:
     last_modified: 2026-09-11T00:29:00Z
 ---
 
-# A commit is not evidence that a source changed
+# Staleness Signals: a commit is not evidence that a source changed
 
 `DRIFT-0009`
 

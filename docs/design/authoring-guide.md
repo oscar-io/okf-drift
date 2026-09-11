@@ -1,12 +1,12 @@
 ---
 # OKF v0.2
 type: "Reference"
-title: "Authoring guide"
+title: "Document Authoring: the house style for front matter, verifiers and logs"
 description: "the house style for OKF front matter, verifiers and logs, and which rules the tool enforces"
 tags: [ reference, authoring, front-matter, house-style ]
 status: "stable"
 generated: { by: pi/opus-5, at: 2026-09-11T00:20:00Z }
-verified: { by: "human:oscar-io", at: 2026-09-11T01:52:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T06:25:45Z }
 sources:
   - id: spec
     resource: https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md
@@ -18,7 +18,7 @@ sources:
     last_modified: 2026-09-11T00:00:43Z
 ---
 
-# Authoring guide
+# Document Authoring: the house style for front matter, verifiers and logs
 
 How to write a document in this bundle. The spec permits more than this; where it does,
 the narrower rule here is a house style, and a document that ignores it is still
@@ -32,7 +32,7 @@ Rules marked **enforced** are checked by `okf-drift`. The rest are on you.
 ---
 # OKF v0.2
 type: "Design Decision"
-title: "The tool owns two sections of an index"
+title: "Index Generation: the tool owns two sections of an index"
 description: "why generation is scoped to two headings instead of the whole file"
 tags: [ decision, index, safety ]
 status: "stable"
