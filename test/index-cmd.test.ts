@@ -10,6 +10,7 @@ import {
   parseCatalogue,
   renderIndex,
   replaceSection,
+  resolveTarget,
 } from '../src/index-cmd.js'
 
 let root: string
@@ -285,6 +286,69 @@ describe('describe', () => {
 
     const finding = checkIndexes(readBundle(root)).findings.find((f) => f.code === 'invalid-description')
     expect(finding?.message).toContain('a list')
+  })
+})
+
+describe('resolveTarget', () => {
+  it('reads a leading slash as relative to the bundle root, the form the spec recommends', () => {
+    expect(resolveTarget('/tables/customers.md', 'tables')).toBe('tables/customers.md')
+    expect(resolveTarget('/tables/customers.md', 'anywhere/else')).toBe('tables/customers.md')
+  })
+
+  it('reads anything else as relative to the index it appears in', () => {
+    expect(resolveTarget('orders.md', 'tables')).toBe('tables/orders.md')
+    expect(resolveTarget('./orders.md', 'tables')).toBe('tables/orders.md')
+    expect(resolveTarget('../metrics/revenue.md', 'tables')).toBe('metrics/revenue.md')
+  })
+
+  it('keeps a trailing slash, which is what marks a directory entry', () => {
+    expect(resolveTarget('archive/', 'tables')).toBe('tables/archive/')
+    expect(resolveTarget('/tables/archive/', '')).toBe('tables/archive/')
+  })
+
+  it('drops a fragment or query, and decodes escapes', () => {
+    expect(resolveTarget('orders.md#schema', 'tables')).toBe('tables/orders.md')
+    expect(resolveTarget('orders.md?v=2', 'tables')).toBe('tables/orders.md')
+    expect(resolveTarget('my%20doc.md', '')).toBe('my doc.md')
+  })
+})
+
+describe('the specification\u2019s own index example', () => {
+  it('passes every link form OKF 6.1 and 8 permit', () => {
+    // This exact shape used to produce five findings on a conformant bundle.
+    concept('tables/customers.md', 'the customers table')
+    concept('tables/orders.md', 'the orders table')
+    concept('tables/archive/old.md', 'an archived thing')
+    file('tables/archive/index.md', '# archive\n\n## Documents\n\n- [`old.md`](old.md) - an archived thing.\n')
+    file(
+      'tables/index.md',
+      [
+        '# Section',
+        '',
+        '* [Customers](/tables/customers.md) - the customers table',
+        '* [Orders](./orders.md) - the orders table',
+        '* [Archive](archive/) - older tables',
+        '',
+      ].join('\n'),
+    )
+
+    expect(checkIndexes(readBundle(root)).findings).toEqual([])
+  })
+
+  it('still reports a subdirectory entry that does not exist', () => {
+    concept('tables/customers.md', 'the customers table')
+    file('tables/index.md', '# Section\n\n* [Customers](customers.md) - the customers table\n* [Gone](gone/) - removed\n')
+
+    const finding = checkIndexes(readBundle(root)).findings.find((f) => f.code === 'dangling-entry')
+    expect(finding?.message).toContain('not a directory here')
+  })
+
+  it('still reports a document link that resolves to nothing', () => {
+    concept('tables/customers.md', 'the customers table')
+    file('tables/index.md', '# Section\n\n* [Customers](customers.md) - x\n* [Ghost](/tables/ghost.md) - y\n')
+
+    const codes = checkIndexes(readBundle(root)).findings.map((f) => f.code)
+    expect(codes).toContain('dangling-entry')
   })
 })
 

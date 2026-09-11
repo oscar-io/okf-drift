@@ -101,6 +101,12 @@ table would lose the columns the tool does not model; until
 [`DRIFT-0005`](../product/tickets/DRIFT-0005.md) preserves shape, `--write` refuses it and
 reports `write-refused` rather than writing anything.
 
+## Link targets are paths, not filenames
+
+An entry is resolved before it is compared (spec §6.1): a leading `/` from the bundle root,
+anything else from the directory the index is in. A trailing slash marks a subdirectory
+entry (§8), which is checked for existence and not described.
+
 ## Curation is legitimate
 
 A directory of a hundred documents may list twenty-five on purpose. `unlisted-document`

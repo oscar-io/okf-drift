@@ -2,6 +2,11 @@
 
 Why the backlog changed. Newest first.
 
+## 2026-09-11
+
+- **Update** [DRIFT-0006](./tickets/DRIFT-0006.md) is done: link targets resolve to paths, so
+  the spec's own index example no longer reports five findings on a conformant bundle.
+
 ## 2026-09-10
 
 - **Creation** [DRIFT-0006](./tickets/DRIFT-0006.md) collects four ways the tool contradicts the

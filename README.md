@@ -22,13 +22,6 @@ $ okf-drift index --check docs
 
 Exits `0` when nothing has drifted and `1` when something has, so it belongs in CI.
 
-## Not a validator
-
-[`okf-kit`](https://www.npmjs.com/package/okf-kit) checks that an
-[OKF](https://openknowledgeformat.org) bundle is **well formed**. `okf-drift` checks
-whether a well-formed bundle is still **true**. Different question, and the useful one
-after week three. Run both.
-
 ## Install
 
 This is not on npm, [on purpose](docs/design/distribution.md). Install it from here.

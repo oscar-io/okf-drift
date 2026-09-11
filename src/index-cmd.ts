@@ -31,6 +31,32 @@ function isListing(target: string): boolean {
 }
 
 /**
+ * Resolve a catalogue link to a bundle-relative path.
+ *
+ * The spec (§6.1) gives three forms and recommends the one this tool used to
+ * reject: a leading `/` is relative to the bundle root, anything else is
+ * relative to the directory the index sits in. A fragment or query is dropped,
+ * and a trailing slash is kept because it is what marks a directory entry (§8).
+ */
+export function resolveTarget(target: string, dir: string): string {
+  const cleaned = decodeURI(target.split('#')[0]?.split('?')[0] ?? '')
+  const trailingSlash = cleaned.endsWith('/')
+  const absolute = cleaned.startsWith('/')
+
+  const base = absolute ? [] : dir === '' ? [] : dir.split('/')
+  const segments = absolute ? cleaned.slice(1).split('/') : cleaned.split('/')
+
+  const path: string[] = [...base]
+  for (const segment of segments) {
+    if (segment === '' || segment === '.') continue
+    if (segment === '..') path.pop()
+    else path.push(segment)
+  }
+
+  return path.join('/') + (trailingSlash && path.length > 0 ? '/' : '')
+}
+
+/**
  * Read the documents a catalogue claims are in its directory.
  *
  * Both a bullet list and a table count, because a registry of many short rows
@@ -126,13 +152,14 @@ export const DOCUMENTS_HEADING = 'Documents'
 const HEADING = /^(#{1,6})\s+(.*?)\s*#*\s*$/
 
 /** The bullet list for a directory's documents, without any heading. */
+/** `fallbacks` is keyed by concept id, the same resolved path the check uses. */
 function renderEntries(directory: BundleDirectory, fallbacks: Map<string, string>): string[] {
   return [...directory.concepts]
     .sort((a, b) => a.id.localeCompare(b.id))
     .map((concept) => {
       const name = conceptName(concept)
       const description = describe(concept)
-      const text = description.kind === 'present' ? description.text : (fallbacks.get(name) ?? '')
+      const text = description.kind === 'present' ? description.text : (fallbacks.get(concept.id) ?? '')
       return `- [\`${name}\`](${name})${text ? ` - ${text}.` : ''}`
     })
 }
@@ -239,6 +266,9 @@ export function checkIndexes(bundle: Bundle, options: IndexOptions = {}): IndexR
   const refused: Finding[] = []
   let checked = 0
 
+  // Every directory in the bundle, so a subdirectory entry can be confirmed.
+  const subdirectories = new Set(bundle.directories.map((directory) => directory.dir).filter((dir) => dir !== ''))
+
   for (const { id, reason } of bundle.unreadable) {
     findings.push({ code: 'unreadable', severity: 'unreadable', id, message: reason })
   }
@@ -279,24 +309,40 @@ export function checkIndexes(bundle: Bundle, options: IndexOptions = {}): IndexR
     }
 
     const actual = readFileSync(indexPath, 'utf8')
-    const listed = parseCatalogue(actual)
-    const listedTargets = new Set(listed.map((entry) => entry.target))
-    const present = new Map(directory.concepts.map((concept) => [conceptName(concept), concept]))
+    const listed = parseCatalogue(actual).map((entry) => ({
+      ...entry,
+      path: resolveTarget(entry.target, directory.dir),
+    }))
+    const listedPaths = new Set(listed.map((entry) => entry.path))
+    const present = new Map(directory.concepts.map((concept) => [concept.id, concept]))
 
     for (const concept of directory.concepts) {
-      const name = conceptName(concept)
-      if (!listedTargets.has(name)) {
+      if (!listedPaths.has(concept.id)) {
         findings.push({
           code: 'unlisted-document',
           severity: 'missing',
           id: indexId,
-          message: `${name} exists but is not in the catalogue`,
+          message: `${conceptName(concept)} exists but is not in the catalogue`,
         })
       }
     }
 
     for (const entry of listed) {
-      if (!present.has(entry.target)) {
+      // A trailing slash marks a subdirectory entry (spec §8), which is listed
+      // rather than described, so it is checked for existence and no further.
+      if (entry.path.endsWith('/')) {
+        if (!subdirectories.has(entry.path.slice(0, -1))) {
+          findings.push({
+            code: 'dangling-entry',
+            severity: 'gone',
+            id: indexId,
+            message: `catalogue lists ${entry.target}, which is not a directory here`,
+          })
+        }
+        continue
+      }
+
+      if (!present.has(entry.path)) {
         findings.push({
           code: 'dangling-entry',
           severity: 'gone',
@@ -305,7 +351,7 @@ export function checkIndexes(bundle: Bundle, options: IndexOptions = {}): IndexR
         })
         continue
       }
-      const concept = present.get(entry.target)!
+      const concept = present.get(entry.path)!
       const description = describe(concept)
 
       if (description.kind === 'absent' && entry.description) {
@@ -342,7 +388,7 @@ export function checkIndexes(bundle: Bundle, options: IndexOptions = {}): IndexR
       // Descriptions already in the catalogue survive regeneration wherever the
       // document does not supply one of its own.
       const fallbacks = new Map(
-        listed.filter((entry) => entry.description).map((entry) => [entry.target, entry.description]),
+        listed.filter((entry) => entry.description).map((entry) => [entry.path, entry.description]),
       )
       const edit = replaceSection(actual, DOCUMENTS_HEADING, renderEntries(directory, fallbacks))
       if (edit.kind === 'replaced') {

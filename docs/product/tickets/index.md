@@ -24,7 +24,7 @@ A ticket says what an idea *is*. It does not say when it will be done.
 | [`DRIFT-0003`](DRIFT-0003.md) | Decide whether a terser catalogue summary is drift | proposed |
 | [`DRIFT-0004`](DRIFT-0004.md) | Configurable index section headings | proposed |
 | [`DRIFT-0005`](DRIFT-0005.md) | Regenerate a section in the shape it already has | proposed |
-| [`DRIFT-0006`](DRIFT-0006.md) | Conform to the spec's link and index rules | partial |
+| [`DRIFT-0006`](DRIFT-0006.md) | Conform to the spec's link and index rules | done |
 
 ## Why not GitHub issues
 
