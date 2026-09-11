@@ -3,7 +3,7 @@
 type: "Feature Idea"
 title: "Regenerate a section in the shape it already has"
 description: "keep a table a table, instead of replacing it with bullets"
-tags: [backlog, feature-idea, index]
+tags: [ backlog, feature-idea, index ]
 status: "draft"
 implementation: "proposed"
 generated: { by: pi/opus-5, at: 2026-09-10T23:10:00Z }

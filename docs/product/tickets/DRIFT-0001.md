@@ -3,7 +3,7 @@
 type: "Feature Idea"
 title: "Report a malformed verified block"
 description: "front matter that looks verified to a reader and parses as nothing to the code should be a finding, not silence"
-tags: [backlog, feature-idea, front-matter, trust]
+tags: [ backlog, feature-idea, front-matter, trust ]
 status: "stable"
 implementation: "done"
 generated: { by: pi/opus-5, at: 2026-09-10T22:25:00Z }

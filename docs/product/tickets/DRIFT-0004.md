@@ -3,7 +3,7 @@
 type: "Feature Idea"
 title: "Configurable index section headings"
 description: "let a bundle name the sections the tool may regenerate, instead of hardcoding two"
-tags: [backlog, feature-idea, index]
+tags: [ backlog, feature-idea, index ]
 status: "draft"
 implementation: "proposed"
 generated: { by: pi/opus-5, at: 2026-09-10T23:10:00Z }

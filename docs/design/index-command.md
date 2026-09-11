@@ -3,7 +3,7 @@
 type: "Design Decision"
 title: "How the index command reads and writes a catalogue"
 description: "why a catalogue is checked rather than owned, and why generation touches two sections and nothing else"
-tags: [decision, index, safety]
+tags: [ decision, index, safety ]
 status: "stable"
 generated: { by: pi/opus-5, at: 2026-09-10T23:20:00Z }
 verified: { by: "human:oscar-io", at: 2026-09-10T23:49:00Z }
