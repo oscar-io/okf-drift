@@ -1,5 +1,5 @@
 ---
-# OKF v0.2
+    # OKF v0.2
 type: "Design Decision"
 title: "TypeScript, over Go and Python"
 description: "why a tool that should not care what language a project uses is written in TypeScript anyway"

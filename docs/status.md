@@ -31,8 +31,9 @@ These describe behaviour you can run.
 
 - [`../README.md`](../README.md) — how to install and run the tool; every command in it works.
 - [`../AGENTS.md`](../AGENTS.md) — the working contract for this repository.
-- [`product/bundle-workflow.md`](product/bundle-workflow.md) — normative: the lifecycle an
-  agent is expected to follow here. Every event in it has been performed in this
+- [`product/bundle-workflow.md`](product/bundle-workflow.md) — normative *for this
+  repository only*, and its preamble says so: the lifecycle an agent is expected to follow
+  here, not one OKF imposes. Every event in it has been performed in this
   repository, and the table of what is and is not enforced is accurate.
 - [`design/authoring-guide.md`](design/authoring-guide.md) — house style; the rules marked **enforced** are genuinely enforced, the rest are convention and nothing checks them.
 - [`design/index-command.md`](design/index-command.md) — fully implemented, including
@@ -53,6 +54,11 @@ These describe behaviour you can run.
 
 These are directions. Nothing in them describes current behaviour.
 
+- [`product/tickets/DRIFT-0008.md`](product/tickets/DRIFT-0008.md) — rejected, and it will
+  not be built here. The gap is real: a folder without front matter exits 2 and is called
+  empty. The ticket names the tool it belongs to instead.
+- [`product/tickets/DRIFT-0007.md`](product/tickets/DRIFT-0007.md) — proposed, and it
+  records a live defect: `no-index` fails a conformant bundle today.
 - [`product/tickets/DRIFT-0003.md`](product/tickets/DRIFT-0003.md) — deliberately open, and
   should stay open until a larger bundle provides evidence.
 - [`product/tickets/DRIFT-0004.md`](product/tickets/DRIFT-0004.md) — proposed; the two

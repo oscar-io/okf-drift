@@ -4,6 +4,16 @@ Why the backlog changed. Newest first.
 
 ## 2026-09-11
 
+- **Creation** [DRIFT-0008](./tickets/DRIFT-0008.md) rejects adoption for this tool and
+  names the suite it belongs to, because a checker that never writes what it cannot derive
+  should not also carry the code that guesses front matter.
+
+- **Creation** [DRIFT-0007](./tickets/DRIFT-0007.md) records that `no-index` fails a bundle
+  the spec permits, which is the same class of error as DRIFT-0006 and undermines every
+  other finding the tool makes.
+- **Update** [bundle-workflow.md](./bundle-workflow.md) says whose rule it is: OKF imposes
+  no workflow, so the imperative below the preamble binds this repository and nobody else.
+
 - **Creation** [bundle-workflow.md](./bundle-workflow.md) sets out the lifecycle an agent
   is to follow when a document is created, a ticket delivered or a plan completed, so the
   bookkeeping is a rule to apply rather than a trace of what happened.

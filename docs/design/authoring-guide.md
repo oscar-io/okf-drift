@@ -3,7 +3,7 @@
 type: "Reference"
 title: "Authoring guide"
 description: "the house style for OKF front matter, verifiers and logs, and which rules the tool enforces"
-tags: [reference, authoring, front-matter, house-style]
+tags: [ reference, authoring, front-matter, house-style ]
 status: "stable"
 generated: { by: pi/opus-5, at: 2026-09-11T00:20:00Z }
 sources:
@@ -33,7 +33,7 @@ Rules marked **enforced** are checked by `okf-drift`. The rest are on you.
 type: "Design Decision"
 title: "The tool owns two sections of an index"
 description: "why generation is scoped to two headings instead of the whole file"
-tags: [decision, index, safety]
+tags: [ decision, index, safety ]
 status: "stable"
 generated: { by: pi/opus-5, at: 2026-09-11T00:20:00Z }
 sources:
@@ -75,10 +75,10 @@ sources. They are different events and are kept apart.
 
 An actor is one of three shapes, and never a display name:
 
-| Form | For | Example |
-|---|---|---|
-| `tool/version` | an agent or tool | `pi/opus-5` |
-| `human:<handle>` | a person | `human:oscar-io` |
+| Form             | For                | Example              |
+|------------------|--------------------|----------------------|
+| `tool/version`   | an agent or tool   | `pi/opus-5`          |
+| `human:<handle>` | a person           | `human:oscar-io`     |
 | `process:<name>` | an automated check | `process:link-check` |
 
 A handle has no spaces. `human:Oscar Reyes` is valid YAML, matches no actor pattern, and
@@ -88,6 +88,8 @@ silently counts as no verification at all.
 
 ```yaml
 verified: { by: "human:oscar-io", at: 2026-09-11T00:20:00Z }
+```
+```
 verified:
   - { by: "human:oscar-io", at: 2026-09-11T00:20:00Z }
   - { by: process:link-check, at: 2026-09-11T01:00:00Z }
@@ -152,8 +154,8 @@ twenty-five on purpose.
 
 Link forms, all permitted (spec §6.1):
 
-| Form | Resolves from |
-|---|---|
-| `/tables/customers.md` | the bundle root — recommended, survives a move |
-| `./orders.md` | the directory the index is in |
-| `archive/` | a subdirectory entry, checked for existence only |
+| Form                   | Resolves from                                    |
+|------------------------|--------------------------------------------------|
+| `/tables/customers.md` | the bundle root — recommended, survives a move   |
+| `./orders.md`          | the directory the index is in                    |
+| `archive/`             | a subdirectory entry, checked for existence only |

@@ -25,6 +25,8 @@ A ticket says what an idea *is*. It does not say when it will be done.
 | [`DRIFT-0004`](DRIFT-0004.md) | Configurable index section headings | proposed |
 | [`DRIFT-0005`](DRIFT-0005.md) | Regenerate a section in the shape it already has | proposed |
 | [`DRIFT-0006`](DRIFT-0006.md) | Conform to the spec's link and index rules | done |
+| [`DRIFT-0007`](DRIFT-0007.md) | Separate house rules from conformance failures | proposed |
+| [`DRIFT-0008`](DRIFT-0008.md) | Adoption belongs to a different tool | rejected |
 
 ## Why not GitHub issues
 

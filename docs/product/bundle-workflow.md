@@ -2,7 +2,7 @@
 # OKF v0.2
 type: "Reference"
 title: "The lifecycle an agent should follow in this bundle"
-description: "the workflow to follow when a document is created, a ticket delivered or a plan completed, and which files to update each time"
+description: "the workflow this repository follows when a document is created, a ticket delivered or a plan completed, and which files to update each time"
 tags: [ reference, workflow, agent, index, log ]
 status: "stable"
 generated: { by: pi/opus-5, at: 2026-09-11T01:14:21Z }
@@ -19,15 +19,42 @@ sources:
     last_modified: 2026-09-11T00:29:00Z
 ---
 
-# Keeping a bundle current while an agent works in it
+# The lifecycle an agent should follow in this bundle
 
-**Follow this.** An OKF bundle is only useful to the next session if it is true when this
-one ends, and keeping it true is mechanical work — an index entry, a log line, a status
-flag. Mechanical work is exactly what an agent should absorb.
+**Follow this, here.** An OKF bundle is only useful to the next session if it is true when
+this one ends, and keeping it true is mechanical work — an index entry, a log line, a
+status flag. Mechanical work is exactly what an agent should absorb.
 
 Each event below lists the files to update. The check at the end of every one is the same.
 When in doubt about whether something is worth recording, the test is always the next
 reader, never the size of the change.
+
+## Whose rule this is
+
+**OKF imposes no workflow.** It is a document format: markdown with front matter in a
+directory. It says an `index.md` *may* exist and a `log.md` *may* exist, and it says
+nothing whatever about when to write to them. That restraint is the format's best
+property, because it is what lets one bundle serve a team's process and another serve a
+single person's notes.
+
+So this document is **one workflow, chosen by this repository**. Three separate voices get
+confused if they are not kept apart:
+
+| Layer | Force | Example |
+|---|---|---|
+| The spec | `MUST` / `MAY` | `type` is required; an index is optional |
+| `okf-drift` | an exit code | a catalogue must match the documents beside it |
+| This document | house rule | a delivered ticket is rewritten in the past tense |
+
+Only the first is binding on anybody. The third is binding *here*, and the imperative mood
+below is deliberate: an agent given a menu of options will pick differently on Tuesday than
+on Wednesday, and a bundle updated inconsistently is worse than one updated by a rule
+somebody disagrees with. **The value is that a choice was made, not that this is the right
+choice.**
+
+Copy it, or replace it with your own. A team tracking work in pull requests would put
+numbers in log entries; one with reviewers would use `verified` far more than this bundle
+does. Both are conformant. What is not worth doing is leaving it unwritten and hoping.
 
 ## The events
 
@@ -62,6 +89,12 @@ description of built behaviour — `status.md` moves too.
 
 A ticket is not deleted when it is delivered. It keeps *why* the thing exists, which
 outlives the change.
+
+### A ticket is rejected
+
+The same, with `implementation: "rejected"`. Rewrite it to lead with the decision and keep
+the reasoning: a rejected ticket exists so the idea is not proposed again from scratch, so
+the half worth keeping is why it was turned down, not what it proposed.
 
 ### A plan is completed
 
@@ -122,6 +155,11 @@ remembered.
 
 The second column is the interesting half, which is why it is written down rather than
 automated. A check that cannot fail teaches nothing.
+
+Note that the first column mixes the spec's rules with this tool's opinions. `okf-drift`
+reports a directory that has documents and no `index.md`, which the spec explicitly
+permits; that is a house rule enforced by a tool, not a conformance failure. See
+[`DRIFT-0007`](tickets/DRIFT-0007.md).
 
 ## The one rule underneath all of it
 
