@@ -328,10 +328,17 @@ export function checkIndexes(bundle: Bundle, options: IndexOptions = {}): IndexR
     }
 
     for (const entry of listed) {
-      // A trailing slash marks a subdirectory entry (spec §8), which is listed
-      // rather than described, so it is checked for existence and no further.
-      if (entry.path.endsWith('/')) {
-        if (!subdirectories.has(entry.path.slice(0, -1))) {
+      // A subdirectory entry (spec §8) is listed rather than described, so it is
+      // checked for existence and no further. Both spellings count: `subdir/`,
+      // and `subdir/index.md`, which is the same link with its target named.
+      const asDirectory = entry.path.endsWith('/')
+        ? entry.path.slice(0, -1)
+        : entry.path.endsWith('/index.md')
+          ? entry.path.slice(0, -'/index.md'.length)
+          : null
+
+      if (asDirectory !== null) {
+        if (!subdirectories.has(asDirectory)) {
           findings.push({
             code: 'dangling-entry',
             severity: 'gone',

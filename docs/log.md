@@ -2,6 +2,11 @@
 
 Why the documents in this bundle moved. Newest first.
 
+## 2026-09-11
+
+- **Creation** [status.md](./status.md) records which documents describe built behaviour and
+  which describe intentions, because a ticket's status was the only place that said so.
+
 ## 2026-09-10
 
 - **Creation** [product/tickets/](./product/tickets/index.md) holds the backlog as markdown in

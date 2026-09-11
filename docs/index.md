@@ -6,6 +6,10 @@ kept honest by `okf-drift index --check docs` in CI.
 
 Read this first, then the directory you need.
 
+## Documents
+
+- [`status.md`](status.md) - which documents describe what the tool does today, which describe intentions, and which behaviour is built versus planned.
+
 ## Directories
 
 - [`design/`](design/index.md) - decisions about how the tool works, and what was rejected.
@@ -20,7 +24,8 @@ Read this first, then the directory you need.
    here, and which rules the tool enforces.
 3. [`design/index-command.md`](design/index-command.md) - the rule the `index` command
    implements, and the file it is not allowed to own.
-4. [`log.md`](log.md) - why any of it changed.
+4. [`status.md`](status.md) - what is built and what is only intended.
+5. [`log.md`](log.md) - why any of it changed.
 
 ## Conventions
 

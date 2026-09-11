@@ -335,6 +335,15 @@ describe('the specification\u2019s own index example', () => {
     expect(checkIndexes(readBundle(root)).findings).toEqual([])
   })
 
+  it('accepts a subdirectory linked through its index, which is the same link named', () => {
+    concept('design/a.md', 'a decision')
+    file('design/index.md', '# design: index\n\n## Documents\n\n- [`a.md`](a.md) - a decision.\n')
+    concept('overview.md', 'the entry point')
+    file('index.md', '# index\n\n## Documents\n\n- [`overview.md`](overview.md) - the entry point.\n\n## Directories\n\n- [`design/`](design/index.md) - decisions.\n')
+
+    expect(checkIndexes(readBundle(root)).findings).toEqual([])
+  })
+
   it('still reports a subdirectory entry that does not exist', () => {
     concept('tables/customers.md', 'the customers table')
     file('tables/index.md', '# Section\n\n* [Customers](customers.md) - the customers table\n* [Gone](gone/) - removed\n')
