@@ -47,7 +47,4 @@ The same applies to `generated` and to `sources[].last_modified`.
 
 ## Why it is not just validation
 
-`okf-kit` would catch the shape. This is about the consequence: an unverified document
-that looks verified is a trust claim the repository cannot support, and trust is what the
-`verified` field exists to carry. The finding belongs next to the drift findings, not in
-a schema checker.
+This is about the consequence: an unverified document that looks verified is a trust claim the repository cannot support, and trust is what the `verified` field exists to carry. The finding belongs next to the drift findings, not in a schema checker.

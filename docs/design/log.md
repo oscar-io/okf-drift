@@ -2,6 +2,11 @@
 
 Why the decisions in this directory changed. Newest first.
 
+## 2026-09-11
+
+- **Creation** [authoring-guide.md](./authoring-guide.md) collects the house style out of
+  `AGENTS.md`, so rules the tool enforces can cite the code that enforces them.
+
 ## 2026-09-10
 
 - **Update** [index-command.md](./index-command.md) is implemented: `--write` now edits one

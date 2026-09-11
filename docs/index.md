@@ -10,14 +10,17 @@ Read this first, then the directory you need.
 
 - [`design/`](design/index.md) - decisions about how the tool works, and what was rejected.
 - [`product/tickets/`](product/tickets/index.md) - the backlog, one file per idea, with a stable id.
+- [`plans/`](plans/index.md) - working plans, deleted once the work lands.
 
 ## Reading order for a newcomer
 
 1. [`design/language-choice.md`](design/language-choice.md) - why TypeScript, and what
    would reverse it.
-2. [`design/index-command.md`](design/index-command.md) - the rule the `index` command
+2. [`design/authoring-guide.md`](design/authoring-guide.md) - how to write a document
+   here, and which rules the tool enforces.
+3. [`design/index-command.md`](design/index-command.md) - the rule the `index` command
    implements, and the file it is not allowed to own.
-3. [`log.md`](log.md) - why any of it changed.
+4. [`log.md`](log.md) - why any of it changed.
 
 ## Conventions
 
