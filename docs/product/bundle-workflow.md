@@ -136,7 +136,7 @@ Nothing special, and that is the point. The bundle is the handoff. Anything a sc
 would have said belongs in a ticket, a log entry or `status.md`; whatever is left is
 workflow state, which has no claim to be kept true.
 
-## After every event
+## After every event, before the commit
 
 ```bash
 pnpm docs:check    # the catalogue matches the documents
@@ -144,8 +144,24 @@ pnpm docs:drift    # the documents match the code they cite
 ```
 
 The first catches the index entry that was forgotten. The second catches a document whose
-`sources` moved on without it. Both belong in CI, where they run whether or not anyone
-remembered.
+`sources` moved on without it.
+
+**Run them before committing, not after.** A commit is the unit somebody else reads, so it
+should not contain a bundle that contradicts itself. CI runs both again on the pushed
+branch, which catches the one case a local run cannot: a file that was fixed but never
+staged.
+
+A finding at this point has three honest responses, and only the first two are common:
+
+- **Fix the document**, when it is genuinely out of date.
+- **Re-read it and add a `verified` entry**, when it is still correct and the code merely
+  moved around it. A review dated after the change silences the finding legitimately, which
+  is the mechanism working rather than a way round it.
+- **Record it**, when the finding is real but the fix is not this change's job. It becomes
+  a ticket, and the commit message says so.
+
+What is never a response is editing `sources[].last_modified` to today. That silences the
+report and destroys the only record of when anyone actually looked.
 
 ## What the tool enforces, and what it cannot
 

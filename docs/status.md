@@ -6,7 +6,7 @@ description: "which documents describe what the tool does today, which describe 
 tags: [ documentation, governance, status ]
 status: "stable"
 generated: { by: pi/opus-5, at: 2026-09-11T00:35:00Z }
-verified: { by: "human:oscar-io", at: 2026-09-11T00:40:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T02:40:00Z }
 sources:
   - id: cli
     resource: /src/cli.ts
@@ -54,9 +54,6 @@ These describe behaviour you can run.
 
 These are directions. Nothing in them describes current behaviour.
 
-- [`product/tickets/DRIFT-0008.md`](product/tickets/DRIFT-0008.md) — rejected, and it will
-  not be built here. The gap is real: a folder without front matter exits 2 and is called
-  empty. The ticket names the tool it belongs to instead.
 - [`product/tickets/DRIFT-0009.md`](product/tickets/DRIFT-0009.md) — proposed, and visible
   today: several stale findings in this bundle are reformatting, not change.
 - [`product/tickets/DRIFT-0007.md`](product/tickets/DRIFT-0007.md) — proposed, and it
@@ -67,7 +64,12 @@ These are directions. Nothing in them describes current behaviour.
   headings are hardcoded.
 - [`product/tickets/DRIFT-0005.md`](product/tickets/DRIFT-0005.md) — proposed; `--write`
   refuses a table rather than preserving its shape, which is the interim behaviour.
-- [`plans/git-oracle.md`](plans/git-oracle.md) — a working plan, not a design. Disposable.
+
+## Decided against (`rejected`)
+
+- [`product/tickets/DRIFT-0008.md`](product/tickets/DRIFT-0008.md) — adoption will not be
+  built here. The gap is real: a folder without front matter exits 2 and is called empty.
+  The ticket names the suite it belongs to instead.
 
 ## Done (`historical`)
 
@@ -92,8 +94,16 @@ Findings emitted today: `unlisted-document`, `dangling-entry`, `description-drif
 `undescribed-document`, `invalid-description`, `no-index`, `unreadable`, `write-refused`,
 `stale-source`, `unverified-since-change`, `missing-source`, `expired`, `malformed-trust`.
 
-Every finding named in a ticket is emitted.
+Two findings are named in open tickets and not emitted: `--require-index`
+([`DRIFT-0007`](product/tickets/DRIFT-0007.md)) and whatever replaces a bare commit count
+([`DRIFT-0009`](product/tickets/DRIFT-0009.md)).
 
 ## Known inaccuracy
 
-None recorded. The dangling `docs/design/drift-detection.md` reference went with the stub.
+`no-index` is listed above as a finding the tool emits, which is true, and it fails a
+bundle the specification permits, which is a defect rather than a feature. See
+[`DRIFT-0007`](product/tickets/DRIFT-0007.md).
+
+This register cites the ticket registry, so it goes stale whenever a ticket is added. That
+is the tool working: `okf-drift check docs` reports it, and re-reading this file is the fix
+rather than editing the timestamp.
