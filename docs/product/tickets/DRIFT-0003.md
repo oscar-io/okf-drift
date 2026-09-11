@@ -6,7 +6,7 @@ description: "whether a deliberately shorter description in an index is good edi
 tags: [backlog, feature-idea, index, open-question]
 status: "draft"
 implementation: "partial"
-generated: { by: claude-opus-5, at: 2026-09-10T22:25:00Z }
+generated: { by: claude/opus-5, at: 2026-09-10T22:25:00Z }
 sources:
   - id: decision
     resource: /docs/design/index-command.md

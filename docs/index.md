@@ -20,12 +20,14 @@ Read this first, then the directory you need.
 
 1. [`design/language-choice.md`](design/language-choice.md) - why TypeScript, and what
    would reverse it.
-2. [`design/authoring-guide.md`](design/authoring-guide.md) - how to write a document
+2. [`design/working-with-okf.md`](design/working-with-okf.md) - the loop a change moves
+   through, and why the order matters.
+3. [`design/authoring-guide.md`](design/authoring-guide.md) - how to write a document
    here, and which rules the tool enforces.
-3. [`design/index-command.md`](design/index-command.md) - the rule the `index` command
+4. [`design/index-command.md`](design/index-command.md) - the rule the `index` command
    implements, and the file it is not allowed to own.
-4. [`status.md`](status.md) - what is built and what is only intended.
-5. [`log.md`](log.md) - why any of it changed.
+5. [`status.md`](status.md) - what is built and what is only intended.
+6. [`log.md`](log.md) - why any of it changed.
 
 ## Conventions
 

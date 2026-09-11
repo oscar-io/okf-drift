@@ -6,7 +6,7 @@ description: "let a bundle name the sections the tool may regenerate, instead of
 tags: [backlog, feature-idea, index]
 status: "draft"
 implementation: "proposed"
-generated: { by: claude-opus-5, at: 2026-09-10T23:10:00Z }
+generated: { by: claude/opus-5, at: 2026-09-10T23:10:00Z }
 sources:
   - id: decision
     resource: /docs/design/index-command.md

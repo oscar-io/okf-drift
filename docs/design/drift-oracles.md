@@ -5,7 +5,7 @@ title: "What the tool does when it cannot check"
 description: "why an unverifiable source is announced rather than passed or failed, and why git is one oracle rather than the oracle"
 tags: [decision, drift, git, safety]
 status: "stable"
-generated: { by: claude-opus-5, at: 2026-09-11T00:45:00Z }
+generated: { by: claude/opus-5, at: 2026-09-11T00:45:00Z }
 sources:
   - id: git
     resource: /src/git.ts

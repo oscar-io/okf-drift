@@ -5,7 +5,7 @@ title: "Installed from git, not published to npm"
 description: "why the tool is a global command you install from the repository rather than a package in the public registry"
 tags: [decision, distribution, npm]
 status: "stable"
-generated: { by: claude-opus-5, at: 2026-09-10T22:50:00Z }
+generated: { by: claude/opus-5, at: 2026-09-10T22:50:00Z }
 verified: 
   - { by: "human:oscar-io", at: 2026-09-10T23:54:00Z }
 sources:

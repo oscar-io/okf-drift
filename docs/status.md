@@ -5,8 +5,8 @@ title: "Documentation status and authority"
 description: "which documents describe what the tool does today, which describe intentions, and which behaviour is built versus planned"
 tags: [documentation, governance, status]
 status: "stable"
-generated: { by: claude-opus-5, at: 2026-09-11T00:35:00Z }
-verified: { by: "huma:oscar-io", at: 2026-09-11T00:40:00Z }
+generated: { by: claude/opus-5, at: 2026-09-11T00:35:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T00:40:00Z }
 sources:
   - id: cli
     resource: /src/cli.ts
@@ -39,6 +39,8 @@ These describe behaviour you can run.
 - [`design/language-choice.md`](design/language-choice.md) — decided and acted on.
 - [`design/distribution.md`](design/distribution.md) — decided; the git-install route is
   the only one, and nothing is published.
+- [`design/working-with-okf.md`](design/working-with-okf.md) — describes the loop the
+  sixteen commits in this repository actually followed, not an aspiration.
 - [`design/drift-oracles.md`](design/drift-oracles.md) — implemented, including
   `--require-git` and the printed summary of what could not be checked.
 

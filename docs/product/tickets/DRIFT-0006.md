@@ -6,7 +6,7 @@ description: "four ways the index check contradicted OKF v0.2, found by reading 
 tags: [backlog, feature-idea, conformance, index]
 status: "stable"
 implementation: "done"
-generated: { by: claude-opus-5, at: 2026-09-11T00:12:00Z }
+generated: { by: claude/opus-5, at: 2026-09-11T00:12:00Z }
 sources:
   - id: spec
     resource: https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md
