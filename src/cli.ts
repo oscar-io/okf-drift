@@ -8,7 +8,7 @@
 import { readBundle } from './bundle.js'
 import { checkDrift } from './drift.js'
 import { checkIndexes } from './index-cmd.js'
-import { formatReport } from './report.js'
+import { formatFinding, formatReport } from './report.js'
 
 const USAGE = `okf-drift — tell when an OKF bundle has stopped being true
 
@@ -94,8 +94,11 @@ export function main(argv: string[]): number {
     const result = checkIndexes(bundle, { write: args.write, strict: args.strict })
     if (args.write) {
       for (const id of result.written) process.stdout.write(`  wrote  ${id}\n`)
-      if (result.written.length === 0) process.stdout.write('  every catalogue was already current.\n')
-      return 0
+      for (const finding of result.refused) process.stdout.write(`${formatFinding(finding)}\n`)
+      if (result.written.length === 0 && result.refused.length === 0) {
+        process.stdout.write('  every catalogue was already current.\n')
+      }
+      return result.refused.length > 0 ? 1 : 0
     }
     process.stdout.write(`${formatReport(result.findings, result.checked, 'catalogue')}\n`)
     return result.findings.length > 0 ? 1 : 0

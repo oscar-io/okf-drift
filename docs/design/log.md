@@ -4,6 +4,8 @@ Why the decisions in this directory changed. Newest first.
 
 ## 2026-09-10
 
+- **Update** [index-command.md](./index-command.md) is implemented: `--write` now edits one
+  section in place and refuses a file it cannot reproduce, instead of overwriting it.
 - **Update** [index-command.md](./index-command.md) absorbs `catalogue-generation.md` and
   `index-sections.md`, which stated one safety rule twice and would have drifted apart.
 - **Creation** [index-command.md](./index-command.md) scopes generation to two headings after

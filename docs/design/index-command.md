@@ -76,7 +76,9 @@ every edit above it, and it explains itself to a reader. The alternatives do not
   it, so the tool would maintain a pointer to its own output and then check that pointer
   for drift.
 
-Both headings are hardcoded for now; naming them is [`DRIFT-0004`](../product/tickets/DRIFT-0004.md).
+Only `## Documents` is implemented; `## Directories` is not yet generated. A heading at
+any level matches, and the section runs to the next heading of the same or higher level.
+Naming the headings is [`DRIFT-0004`](../product/tickets/DRIFT-0004.md).
 
 ## Why --write cannot be trusted with prose
 
@@ -96,7 +98,8 @@ the fix is not to edit the catalogue.
 
 The same rule bans reshaping. Entries are generated as bullets, so a section written as a
 table would lose the columns the tool does not model; until
-[`DRIFT-0005`](../product/tickets/DRIFT-0005.md) preserves shape, `--write` refuses it.
+[`DRIFT-0005`](../product/tickets/DRIFT-0005.md) preserves shape, `--write` refuses it and
+reports `write-refused` rather than writing anything.
 
 ## Curation is legitimate
 

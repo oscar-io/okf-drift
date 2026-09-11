@@ -119,13 +119,30 @@ export function normaliseDescription(text: string): string {
     .trim()
 }
 
+/** The heading whose body the tool may regenerate. See docs/design/index-command.md. */
+export const DOCUMENTS_HEADING = 'Documents'
+
+/** Matches any ATX heading, capturing its level and text. */
+const HEADING = /^(#{1,6})\s+(.*?)\s*#*\s*$/
+
+/** The bullet list for a directory's documents, without any heading. */
+function renderEntries(directory: BundleDirectory, fallbacks: Map<string, string>): string[] {
+  return [...directory.concepts]
+    .sort((a, b) => a.id.localeCompare(b.id))
+    .map((concept) => {
+      const name = conceptName(concept)
+      const description = describe(concept)
+      const text = description.kind === 'present' ? description.text : (fallbacks.get(name) ?? '')
+      return `- [\`${name}\`](${name})${text ? ` - ${text}.` : ''}`
+    })
+}
+
 /**
- * The catalogue this directory should have, derived from the documents in it.
+ * A whole catalogue, for a directory that has none yet.
  *
- * `fallbacks` carries descriptions already written in the existing catalogue,
- * used only where the document itself has none. Regenerating must never delete
- * prose: a documentation tool that silently drops a sentence someone wrote is
- * worse than one that reports nothing at all.
+ * Only ever used to create a missing file. An existing file is edited in place
+ * by `replaceSection`, because everything outside the generated section belongs
+ * to whoever wrote it.
  */
 export function renderIndex(directory: BundleDirectory, fallbacks: Map<string, string> = new Map()): string {
   const heading = directory.dir === '' ? 'index' : `${directory.dir}: index`
@@ -135,15 +152,64 @@ export function renderIndex(directory: BundleDirectory, fallbacks: Map<string, s
     lines.push('What changed in any of these is in [`log.md`](log.md).', '')
   }
 
-  lines.push('## Documents', '')
-  for (const concept of [...directory.concepts].sort((a, b) => a.id.localeCompare(b.id))) {
-    const name = conceptName(concept)
-    const description = describe(concept)
-    const text = description.kind === 'present' ? description.text : (fallbacks.get(name) ?? '')
-    lines.push(`- [\`${name}\`](${name})${text ? ` - ${text}.` : ''}`)
-  }
-  lines.push('')
+  lines.push(`## ${DOCUMENTS_HEADING}`, '', ...renderEntries(directory, fallbacks), '')
   return lines.join('\n')
+}
+
+export type SectionEdit =
+  | { kind: 'replaced'; text: string }
+  | { kind: 'unchanged' }
+  /** The section is absent, or holds something the tool would reshape. */
+  | { kind: 'refused'; reason: string }
+
+/**
+ * Replace the body of one heading, leaving every other line untouched.
+ *
+ * The section runs from its heading to the next heading of the same or higher
+ * level, so prose above it, sections beside it and anything below all survive.
+ * Absent the heading, nothing is written: an index is a document that contains
+ * a generated list, not a generated document.
+ */
+export function replaceSection(text: string, heading: string, entries: string[]): SectionEdit {
+  const lines = text.split(/\r?\n/)
+
+  const start = lines.findIndex((line) => {
+    const match = HEADING.exec(line)
+    return match !== null && (match[2] ?? '').trim().toLowerCase() === heading.toLowerCase()
+  })
+  if (start === -1) {
+    return { kind: 'refused', reason: `no "${heading}" heading to regenerate` }
+  }
+
+  const level = (HEADING.exec(lines[start] ?? '')?.[1] ?? '#').length
+  let end = lines.length
+  for (let i = start + 1; i < lines.length; i += 1) {
+    const match = HEADING.exec(lines[i] ?? '')
+    if (match && (match[1] ?? '').length <= level) {
+      end = i
+      break
+    }
+  }
+
+  const body = lines.slice(start + 1, end)
+  if (body.some((line) => /^\s*\|/.test(line))) {
+    // A table carries columns the renderer cannot produce, so rewriting it as
+    // bullets would silently drop them. See DRIFT-0005.
+    return { kind: 'refused', reason: `the "${heading}" section is a table, which --write would reshape` }
+  }
+
+  const trailing: string[] = []
+  while (body.length > 0 && (body[body.length - 1] ?? '').trim() === '') {
+    trailing.unshift(body.pop() as string)
+  }
+
+  const replacement = ['', ...entries]
+  if (body.join('\n') === replacement.join('\n')) return { kind: 'unchanged' }
+
+  return {
+    kind: 'replaced',
+    text: [...lines.slice(0, start + 1), ...replacement, ...trailing, ...lines.slice(end)].join('\n'),
+  }
 }
 
 export interface IndexOptions {
@@ -157,6 +223,8 @@ export interface IndexResult {
   findings: Finding[]
   checked: number
   written: string[]
+  /** Files `--write` declined to touch, reported so the refusal is visible. */
+  refused: Finding[]
 }
 
 /**
@@ -168,6 +236,7 @@ export interface IndexResult {
 export function checkIndexes(bundle: Bundle, options: IndexOptions = {}): IndexResult {
   const findings: Finding[] = []
   const written: string[] = []
+  const refused: Finding[] = []
   let checked = 0
 
   for (const { id, reason } of bundle.unreadable) {
@@ -275,13 +344,21 @@ export function checkIndexes(bundle: Bundle, options: IndexOptions = {}): IndexR
       const fallbacks = new Map(
         listed.filter((entry) => entry.description).map((entry) => [entry.target, entry.description]),
       )
-      const expected = renderIndex(directory, fallbacks)
-      if (actual !== expected) {
-        writeFileSync(indexPath, expected, 'utf8')
+      const edit = replaceSection(actual, DOCUMENTS_HEADING, renderEntries(directory, fallbacks))
+      if (edit.kind === 'replaced') {
+        writeFileSync(indexPath, edit.text, 'utf8')
         written.push(indexId)
+      } else if (edit.kind === 'refused') {
+        refused.push({
+          code: 'write-refused',
+          severity: 'missing',
+          id: indexId,
+          message: edit.reason,
+          detail: 'nothing was written; edit this file by hand',
+        })
       }
     }
   }
 
-  return { findings: options.write ? [] : findings, checked, written }
+  return { findings: options.write ? [] : findings, checked, written, refused }
 }

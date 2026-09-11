@@ -3,7 +3,14 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { readBundle } from '../src/bundle.js'
-import { checkIndexes, describe as describeConcept, normaliseDescription, parseCatalogue, renderIndex } from '../src/index-cmd.js'
+import {
+  checkIndexes,
+  describe as describeConcept,
+  normaliseDescription,
+  parseCatalogue,
+  renderIndex,
+  replaceSection,
+} from '../src/index-cmd.js'
 
 let root: string
 
@@ -278,6 +285,74 @@ describe('describe', () => {
 
     const finding = checkIndexes(readBundle(root)).findings.find((f) => f.code === 'invalid-description')
     expect(finding?.message).toContain('a list')
+  })
+})
+
+describe('replaceSection', () => {
+  const entries = ['- [`a.md`](a.md) - first.']
+
+  it('replaces only the body of the named heading', () => {
+    const before = ['# index', '', 'Prose above.', '', '## Documents', '', '- [`old.md`](old.md)', '', '## Other', '', 'Prose below.'].join('\n')
+    const edit = replaceSection(before, 'Documents', entries)
+    expect(edit.kind).toBe('replaced')
+    const after = edit.kind === 'replaced' ? edit.text : ''
+    expect(after).toContain('Prose above.')
+    expect(after).toContain('## Other')
+    expect(after).toContain('Prose below.')
+    expect(after).toContain('- [`a.md`](a.md) - first.')
+    expect(after).not.toContain('old.md')
+  })
+
+  it('refuses when the heading is absent, rather than writing a whole file', () => {
+    const edit = replaceSection('# ticket registry\n\nHand-written rules.\n', 'Documents', entries)
+    expect(edit).toEqual({ kind: 'refused', reason: 'no "Documents" heading to regenerate' })
+  })
+
+  it('refuses a section written as a table, which it would reshape', () => {
+    const before = '# index\n\n## Documents\n\n| Doc | Note |\n|---|---|\n| [`a.md`](a.md) | x |\n'
+    const edit = replaceSection(before, 'Documents', entries)
+    expect(edit.kind).toBe('refused')
+    expect(edit.kind === 'refused' && edit.reason).toContain('table')
+  })
+
+  it('leaves a table in a different section alone', () => {
+    const before = '# index\n\n## Documents\n\n- [`old.md`](old.md)\n\n## Conventions\n\n| Rule | Why |\n|---|---|\n| a | b |\n'
+    const edit = replaceSection(before, 'Documents', entries)
+    expect(edit.kind).toBe('replaced')
+    expect(edit.kind === 'replaced' && edit.text).toContain('| a | b |')
+  })
+
+  it('stops at a heading of the same or higher level', () => {
+    const before = '# index\n\n## Documents\n\n- old\n\n### A subheading inside\n\nkept?\n\n## Next\n\nafter.'
+    const edit = replaceSection(before, 'Documents', entries)
+    // A deeper heading is inside the section, so it is part of the body.
+    expect(edit.kind === 'replaced' && edit.text).toContain('## Next')
+    expect(edit.kind === 'replaced' && edit.text).not.toContain('A subheading inside')
+  })
+
+  it('reports no change when the section already matches', () => {
+    const before = '# index\n\n## Documents\n\n- [`a.md`](a.md) - first.\n'
+    expect(replaceSection(before, 'Documents', entries).kind).toBe('unchanged')
+  })
+
+  it('matches a heading at any level, per the spec', () => {
+    const before = '# Documents\n\n- old\n'
+    expect(replaceSection(before, 'Documents', entries).kind).toBe('replaced')
+  })
+})
+
+describe('--write refuses rather than destroys', () => {
+  it('leaves a hand-written registry untouched and says why', () => {
+    // The regression that matters most: this file was destroyed once.
+    concept('product/DRIFT-0001.md', 'a ticket')
+    const registry = '# ticket registry\n\nHow to mint an id, and why not GitHub issues.\n\n| Id | Title |\n|---|---|\n| [`DRIFT-0001.md`](DRIFT-0001.md) | A ticket |\n'
+    file('product/index.md', registry)
+
+    const result = checkIndexes(readBundle(root), { write: true })
+
+    expect(readFileSync(join(root, 'product/index.md'), 'utf8')).toBe(registry)
+    expect(result.written).toEqual([])
+    expect(result.refused[0]?.code).toBe('write-refused')
   })
 })
 
