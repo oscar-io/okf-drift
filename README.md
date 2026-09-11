@@ -87,9 +87,14 @@ $ okf-drift check docs
 | `unverified-since-change` | cited code changed after the newest `verified.at` |
 | `missing-source` | a cited file is gone |
 | `expired` | `stale_after` is in the past |
+| `malformed-trust` | a `verified`, `generated` or `last_modified` the tool cannot read |
 
 A document reviewed *after* the code changed is not stale, so re-reading one and adding a
 `verified` entry silences it honestly.
+
+`malformed-trust` is the one that catches a lie rather than a staleness:
+`verified: { by: "human:Oscar Reyes" }` is valid YAML, matches no actor pattern, and would
+otherwise leave a document that *looks* reviewed counting as unverified with nobody told.
 
 **Without git it still works, and says so.** A bundle in a tarball or an Obsidian vault is
 checked as far as it can be — a missing citation is still a missing citation — and the

@@ -125,6 +125,72 @@ export function verificationEvents(meta: FrontMatter): Actor[] {
   )
 }
 
+/** A trust field the code could not read, and the reason nobody was told. */
+export interface TrustDefect {
+  /** `verified`, `verified[1]`, `generated`, `sources[0].last_modified`. */
+  field: string
+  reason: string
+}
+
+function actorDefects(field: string, value: unknown): TrustDefect[] {
+  if (typeof value !== 'object' || value === null || Array.isArray(value)) {
+    return [{ field, reason: 'must be a mapping with a `by` actor' }]
+  }
+  const event = value as Actor
+  const defects: TrustDefect[] = []
+  if (event.by === undefined) {
+    defects.push({ field, reason: 'has no `by` actor' })
+  } else if (!isActor(event.by)) {
+    defects.push({
+      field: `${field}.by`,
+      reason: `"${String(event.by)}" is not an actor: use human:<handle>, process:<name> or tool/version, with no spaces`,
+    })
+  }
+  if (event.at !== undefined && !isInstant(event.at)) {
+    defects.push({ field: `${field}.at`, reason: `"${String(event.at)}" is not an RFC 3339 instant with an offset` })
+  }
+  return defects
+}
+
+/**
+ * Trust claims that a reader would believe and the code cannot.
+ *
+ * The failure this exists to prevent: front matter that says a human verified
+ * a document, parsed into nothing, reported as unverified, and nobody told.
+ * A malformed claim is worse than an absent one, because absence is honest.
+ */
+export function trustDefects(meta: FrontMatter): TrustDefect[] {
+  const defects: TrustDefect[] = []
+
+  if (meta.generated !== undefined && meta.generated !== null) {
+    defects.push(...actorDefects('generated', meta.generated))
+  }
+
+  const verified = meta.verified
+  if (verified !== undefined && verified !== null) {
+    const events = Array.isArray(verified) ? verified : [verified]
+    if (events.length === 0) {
+      defects.push({ field: 'verified', reason: 'is an empty list; omit the key instead' })
+    }
+    events.forEach((event, i) => {
+      defects.push(...actorDefects(Array.isArray(verified) ? `verified[${i}]` : 'verified', event))
+    })
+  }
+
+  for (const [i, source] of (Array.isArray(meta.sources) ? meta.sources : []).entries()) {
+    if (typeof source !== 'object' || source === null) continue
+    const at = (source as Source).last_modified
+    if (at !== undefined && !isInstant(at)) {
+      defects.push({
+        field: `sources[${i}].last_modified`,
+        reason: `"${String(at)}" is not an RFC 3339 instant with an offset`,
+      })
+    }
+  }
+
+  return defects
+}
+
 /** The most recent `verified.at`, or `null` when nothing carries a usable instant. */
 export function lastVerifiedAt(meta: FrontMatter): Date | null {
   const instants = verificationEvents(meta)

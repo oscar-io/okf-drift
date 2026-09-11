@@ -4,6 +4,9 @@ Why the backlog changed. Newest first.
 
 ## 2026-09-11
 
+- **Update** [DRIFT-0001](./tickets/DRIFT-0001.md) is done: an unreadable `verified`,
+  `generated` or `last_modified` is reported instead of counting for nothing in silence.
+
 - **Update** [DRIFT-0002](./tickets/DRIFT-0002.md) is done: the git oracle reports documents
   whose cited code moved after they were written or reviewed.
 

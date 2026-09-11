@@ -4,8 +4,8 @@ type: "Feature Idea"
 title: "Report a malformed verified block"
 description: "front matter that looks verified to a reader and parses as nothing to the code should be a finding, not silence"
 tags: [backlog, feature-idea, front-matter, trust]
-status: "draft"
-implementation: "proposed"
+status: "stable"
+implementation: "done"
 generated: { by: claude-opus-5, at: 2026-09-10T22:25:00Z }
 sources:
   - id: helpers
@@ -33,12 +33,11 @@ Both are valid YAML. Both leave `trustTier()` returning `unverified` while the f
 by a person, plainly claims otherwise. That is the worst kind of failure this tool can
 have: the document and the code disagree, and nothing says so.
 
-## What to build
+## Built
 
-A `malformed-verified` finding, severity `unreadable`, reported when `verified` is
-present but yields no usable events, with the reason:
+A `malformed-trust` finding, severity `unreadable`, reported by `okf-drift check` for each
+unreadable claim, naming the field and the reason:
 
-- `verified` is a mapping, and should be a list of them
 - `by` is not an actor — `human:<handle>`, `process:<name>` or `<tool>/<version>` — and a
   handle contains no spaces
 - `at` is not an RFC 3339 instant with an offset

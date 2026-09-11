@@ -6,6 +6,7 @@ import {
   lastVerifiedAt,
   resourceSources,
   splitFrontMatter,
+  trustDefects,
   trustTier,
 } from '../src/frontmatter.js'
 
@@ -100,5 +101,40 @@ describe('resourceSources', () => {
     })
     expect(sources).toHaveLength(1)
     expect(sources[0]?.resource).toBe('/src/cache.ts')
+  })
+})
+
+describe('trustDefects', () => {
+  it('is silent on front matter it can read, in either verified form', () => {
+    expect(trustDefects({ verified: { by: 'human:oscar-io', at: '2026-09-11T00:00:00Z' } })).toEqual([])
+    expect(trustDefects({ verified: [{ by: 'process:link-check', at: '2026-09-11T00:00:00Z' }] })).toEqual([])
+    expect(trustDefects({})).toEqual([])
+  })
+
+  it('catches a display name, which is the mistake that silently unverifies a document', () => {
+    const [defect] = trustDefects({ verified: [{ by: 'human:Oscar Reyes', at: '2026-09-11T00:00:00Z' }] })
+    expect(defect?.field).toBe('verified[0].by')
+    expect(defect?.reason).toContain('no spaces')
+  })
+
+  it('catches an instant that is not one', () => {
+    expect(trustDefects({ verified: { by: 'human:ok', at: 'last tuesday' } })[0]?.field).toBe('verified.at')
+    // A bare date is not an instant: no time, no offset.
+    expect(trustDefects({ verified: { by: 'human:ok', at: '2026-09-11' } })).toHaveLength(1)
+  })
+
+  it('catches an entry with no actor at all', () => {
+    expect(trustDefects({ verified: { at: '2026-09-11T00:00:00Z' } })[0]?.reason).toContain('no `by`')
+  })
+
+  it('checks generated and sources[].last_modified by the same rules', () => {
+    expect(trustDefects({ generated: { by: 'written by an agent' } })[0]?.field).toBe('generated.by')
+    expect(trustDefects({ sources: [{ resource: '/a.ts', last_modified: '2026-09-11' }] })[0]?.field).toBe(
+      'sources[0].last_modified',
+    )
+  })
+
+  it('reports an empty list, which claims nothing but looks like something', () => {
+    expect(trustDefects({ verified: [] })[0]?.reason).toContain('omit the key')
   })
 })

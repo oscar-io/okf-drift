@@ -179,3 +179,20 @@ describe('a bundle outside git', () => {
     expect(result.skipped).toEqual([{ reason: 'no git repository', count: 1 }])
   })
 })
+
+describe('a trust claim the tool cannot read', () => {
+  it('is reported, not silently discarded', () => {
+    // The whole point of DRIFT-0001: this document says a human verified it.
+    // A reader believes that. The code cannot, and used to say nothing.
+    doc('docs/caching.md', 'verified: { by: "human:Oscar Reyes", at: 2026-01-01T12:00:00Z }')
+
+    const finding = checkDrift(readBundle(join(root, 'docs'))).findings.find((f) => f.code === 'malformed-trust')
+    expect(finding?.severity).toBe('unreadable')
+    expect(finding?.message).toContain('verified.by')
+  })
+
+  it('says nothing about front matter it can read', () => {
+    doc('docs/caching.md', 'verified: { by: "human:oscar-io", at: 2026-01-01T12:00:00Z }')
+    expect(checkDrift(readBundle(join(root, 'docs'))).findings).toEqual([])
+  })
+})

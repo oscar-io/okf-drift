@@ -12,7 +12,7 @@
 import { existsSync } from 'node:fs'
 import { isAbsolute, join, resolve } from 'node:path'
 import type { Bundle, Concept } from './bundle.js'
-import { isInstant, lastVerifiedAt, resourceSources } from './frontmatter.js'
+import { isInstant, lastVerifiedAt, resourceSources, trustDefects } from './frontmatter.js'
 import { commitsSince, isTracked, lastChanged, repoRoot } from './git.js'
 import type { Finding } from './report.js'
 
@@ -78,6 +78,16 @@ export function checkDrift(bundle: Bundle, options: DriftOptions = {}): DriftRes
   }
 
   for (const concept of bundle.concepts) {
+    for (const defect of trustDefects(concept.meta)) {
+      findings.push({
+        code: 'malformed-trust',
+        severity: 'unreadable',
+        id: concept.id,
+        message: `${defect.field} ${defect.reason}`,
+        detail: 'the document claims something the tool cannot read, so it counts for nothing',
+      })
+    }
+
     const staleAfter = concept.meta.stale_after
     if (isInstant(staleAfter) && new Date(staleAfter) <= now) {
       findings.push({

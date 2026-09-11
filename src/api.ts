@@ -12,9 +12,10 @@ export {
   lastVerifiedAt,
   resourceSources,
   splitFrontMatter,
+  trustDefects,
   trustTier,
   verificationEvents,
 } from './frontmatter.js'
-export type { Actor, FrontMatter, ParsedDocument, Source } from './frontmatter.js'
+export type { Actor, FrontMatter, ParsedDocument, Source, TrustDefect } from './frontmatter.js'
 export { formatFinding, formatReport } from './report.js'
 export type { Finding, Severity } from './report.js'

@@ -52,8 +52,6 @@ These describe behaviour you can run.
 
 These are directions. Nothing in them describes current behaviour.
 
-- [`product/tickets/DRIFT-0001.md`](product/tickets/DRIFT-0001.md) — proposed. A malformed
-  `verified` block is still discarded silently today.
 - [`product/tickets/DRIFT-0003.md`](product/tickets/DRIFT-0003.md) — deliberately open, and
   should stay open until a larger bundle provides evidence.
 - [`product/tickets/DRIFT-0004.md`](product/tickets/DRIFT-0004.md) — proposed; the two
@@ -64,6 +62,8 @@ These are directions. Nothing in them describes current behaviour.
 
 ## Done (`historical`)
 
+- [`product/tickets/DRIFT-0001.md`](product/tickets/DRIFT-0001.md) — done. A malformed trust
+  claim is reported as `malformed-trust` rather than discarded.
 - [`product/tickets/DRIFT-0002.md`](product/tickets/DRIFT-0002.md) — done. The git oracle
   works, and its plan is deleted.
 - [`product/tickets/DRIFT-0006.md`](product/tickets/DRIFT-0006.md) — done. Kept because it
@@ -81,9 +81,9 @@ These are directions. Nothing in them describes current behaviour.
 
 Findings emitted today: `unlisted-document`, `dangling-entry`, `description-drift`,
 `undescribed-document`, `invalid-description`, `no-index`, `unreadable`, `write-refused`,
-`stale-source`, `unverified-since-change`, `missing-source`, `expired`.
+`stale-source`, `unverified-since-change`, `missing-source`, `expired`, `malformed-trust`.
 
-Not yet emitted, though named in a ticket: `malformed-verified`.
+Every finding named in a ticket is emitted.
 
 ## Known inaccuracy
 
