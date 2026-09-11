@@ -4,6 +4,10 @@ Why the backlog changed. Newest first.
 
 ## 2026-09-11
 
+- **Creation** [bundle-workflow.md](./bundle-workflow.md) records which files move when a
+  document is created, delivered, superseded or deleted, so the bookkeeping is a rule
+  rather than a memory.
+
 - **Update** [DRIFT-0001](./tickets/DRIFT-0001.md) is done: an unreadable `verified`,
   `generated` or `last_modified` is reported instead of counting for nothing in silence.
 

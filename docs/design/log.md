@@ -5,11 +5,8 @@ Why the decisions in this directory changed. Newest first.
 ## 2026-09-11
 
 - **Update** [authoring-guide.md](./authoring-guide.md) corrects its own actor example: it
-  offered `claude-opus-5` under a heading reading `tool/version`, and thirteen documents
+  offered a bare model name under a heading reading `tool/version`, and thirteen documents
   copied it.
-- **Creation** [working-with-okf.md](./working-with-okf.md) records the loop this repository
-  was actually built with, including that a decision written and not built the same day is
-  what destroyed the ticket registry.
 
 - **Creation** [drift-oracles.md](./drift-oracles.md) makes "I could not check this" a third
   outcome, because a checker that silently verifies nothing is worse than one that fails.

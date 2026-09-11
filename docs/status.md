@@ -5,7 +5,7 @@ title: "Documentation status and authority"
 description: "which documents describe what the tool does today, which describe intentions, and which behaviour is built versus planned"
 tags: [documentation, governance, status]
 status: "stable"
-generated: { by: claude/opus-5, at: 2026-09-11T00:35:00Z }
+generated: { by: pi/opus-5, at: 2026-09-11T00:35:00Z }
 verified: { by: "human:oscar-io", at: 2026-09-11T00:40:00Z }
 sources:
   - id: cli
@@ -32,6 +32,8 @@ These describe behaviour you can run.
 
 - [`../README.md`](../README.md) — how to install and run the tool; every command in it works.
 - [`../AGENTS.md`](../AGENTS.md) — the working contract for this repository.
+- [`product/bundle-workflow.md`](product/bundle-workflow.md) — every event it describes was
+  performed in this repository; the table of what is and is not enforced is accurate.
 - [`design/authoring-guide.md`](design/authoring-guide.md) — house style; the rules marked
   **enforced** are genuinely enforced, the rest are convention and nothing checks them.
 - [`design/index-command.md`](design/index-command.md) — fully implemented, including
@@ -39,8 +41,6 @@ These describe behaviour you can run.
 - [`design/language-choice.md`](design/language-choice.md) — decided and acted on.
 - [`design/distribution.md`](design/distribution.md) — decided; the git-install route is
   the only one, and nothing is published.
-- [`design/working-with-okf.md`](design/working-with-okf.md) — describes the loop the
-  sixteen commits in this repository actually followed, not an aspiration.
 - [`design/drift-oracles.md`](design/drift-oracles.md) — implemented, including
   `--require-git` and the printed summary of what could not be checked.
 
