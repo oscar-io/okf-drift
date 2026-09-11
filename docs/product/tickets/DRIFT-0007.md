@@ -7,15 +7,16 @@ tags: [ backlog, feature-idea, conformance, findings ]
 status: "draft"
 implementation: "proposed"
 generated: { by: pi/opus-5, at: 2026-09-11T01:45:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T01:52:00Z }
 sources:
-  - id: spec
-    resource: https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md
-    title: "OKF v0.2 §8 and §11: an index MAY appear, and consumers MUST NOT reject a bundle for missing one"
-    author: GoogleCloudPlatform/knowledge-catalog
-  - id: check
-    resource: /src/index-cmd.ts
-    title: "The no-index finding, and the rest that share its severity"
-    last_modified: 2026-09-11T00:29:00Z
+   - id: spec
+     resource: https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md
+     title: "OKF v0.2 §8 and §11: an index MAY appear, and consumers MUST NOT reject a bundle for missing one"
+     author: GoogleCloudPlatform/knowledge-catalog
+   - id: check
+     resource: /src/index-cmd.ts
+     title: "The no-index finding, and the rest that share its severity"
+     last_modified: 2026-09-11T00:29:00Z
 ---
 
 # Separate house rules from conformance failures

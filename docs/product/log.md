@@ -4,6 +4,10 @@ Why the backlog changed. Newest first.
 
 ## 2026-09-11
 
+- **Creation** [DRIFT-0009](./tickets/DRIFT-0009.md) records that renaming a field across the
+  bundle marked six documents stale, because the check counts commits and a commit is a unit
+  of authoring rather than of meaning.
+
 - **Creation** [DRIFT-0008](./tickets/DRIFT-0008.md) rejects adoption for this tool and
   names the suite it belongs to, because a checker that never writes what it cannot derive
   should not also carry the code that guesses front matter.

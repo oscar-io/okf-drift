@@ -17,16 +17,17 @@ A ticket says what an idea *is*. It does not say when it will be done.
 
 ## Tickets
 
-| Id | Title | Implementation |
-|---|---|---|
-| [`DRIFT-0001`](DRIFT-0001.md) | Report a malformed `verified` block | done |
-| [`DRIFT-0002`](DRIFT-0002.md) | The git oracle | done |
-| [`DRIFT-0003`](DRIFT-0003.md) | Decide whether a terser catalogue summary is drift | proposed |
-| [`DRIFT-0004`](DRIFT-0004.md) | Configurable index section headings | proposed |
-| [`DRIFT-0005`](DRIFT-0005.md) | Regenerate a section in the shape it already has | proposed |
-| [`DRIFT-0006`](DRIFT-0006.md) | Conform to the spec's link and index rules | done |
-| [`DRIFT-0007`](DRIFT-0007.md) | Separate house rules from conformance failures | proposed |
-| [`DRIFT-0008`](DRIFT-0008.md) | Adoption belongs to a different tool | rejected |
+| Id                            | Title                                              | Implementation |
+|-------------------------------|----------------------------------------------------|----------------|
+| [`DRIFT-0001`](DRIFT-0001.md) | Report a malformed `verified` block                | done           |
+| [`DRIFT-0002`](DRIFT-0002.md) | The git oracle                                     | done           |
+| [`DRIFT-0003`](DRIFT-0003.md) | Decide whether a terser catalogue summary is drift | proposed       |
+| [`DRIFT-0004`](DRIFT-0004.md) | Configurable index section headings                | proposed       |
+| [`DRIFT-0005`](DRIFT-0005.md) | Regenerate a section in the shape it already has   | proposed       |
+| [`DRIFT-0006`](DRIFT-0006.md) | Conform to the spec's link and index rules         | done           |
+| [`DRIFT-0007`](DRIFT-0007.md) | Separate house rules from conformance failures     | proposed       |
+| [`DRIFT-0008`](DRIFT-0008.md) | Adoption belongs to a different tool               | rejected       |
+| [`DRIFT-0009`](DRIFT-0009.md) | A commit is not evidence that a source changed     | proposed       |
 
 ## Why not GitHub issues
 

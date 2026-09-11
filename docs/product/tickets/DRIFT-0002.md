@@ -7,6 +7,7 @@ tags: [ backlog, feature-idea, drift, git ]
 status: "stable"
 implementation: "done"
 generated: { by: pi/opus-5, at: 2026-09-10T22:25:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T01:52:00Z }
 sources:
   - id: stub
     resource: /src/drift.ts

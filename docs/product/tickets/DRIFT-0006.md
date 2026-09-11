@@ -7,6 +7,7 @@ tags: [ backlog, feature-idea, conformance, index ]
 status: "stable"
 implementation: "done"
 generated: { by: pi/opus-5, at: 2026-09-11T00:12:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T01:52:00Z }
 sources:
   - id: spec
     resource: https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md

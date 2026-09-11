@@ -6,6 +6,7 @@ description: "the house style for OKF front matter, verifiers and logs, and whic
 tags: [ reference, authoring, front-matter, house-style ]
 status: "stable"
 generated: { by: pi/opus-5, at: 2026-09-11T00:20:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T01:52:00Z }
 sources:
   - id: spec
     resource: https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md

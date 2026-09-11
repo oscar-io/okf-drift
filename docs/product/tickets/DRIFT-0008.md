@@ -7,6 +7,7 @@ tags: [ backlog, feature-idea, adoption, scope, rejected ]
 status: "draft"
 implementation: "rejected"
 generated: { by: pi/opus-5, at: 2026-09-11T01:49:29Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T01:52:00Z }
 sources:
   - id: walker
     resource: /src/bundle.ts
@@ -47,11 +48,11 @@ only just". That is not a reason, it is a shrug. The honest version:
 
 **The commands divide on what they write.**
 
-| | Reads | Writes | Depends on |
-|---|---|---|---|
-| adoption | prose, no front matter | front matter | guessing, and a human accepting the guess |
-| cataloguing | front matter | `index.md`, `log.md` | derivation only |
-| drift | front matter and git | nothing | comparison only |
+|             | Reads                  | Writes               | Depends on                                |
+|-------------|------------------------|----------------------|-------------------------------------------|
+| adoption    | prose, no front matter | front matter         | guessing, and a human accepting the guess |
+| cataloguing | front matter           | `index.md`, `log.md` | derivation only                           |
+| drift       | front matter and git   | nothing              | comparison only                           |
 
 `okf-drift` never writes anything it cannot derive. That is its safety property, argued out
 in [`index-command.md`](../../design/index-command.md) after `--write` destroyed a file.

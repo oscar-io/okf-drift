@@ -7,6 +7,7 @@ tags: [backlog, feature-idea, index]
 status: "draft"
 implementation: "proposed"
 generated: { by: pi/opus-5, at: 2026-09-10T23:10:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T01:52:00Z }
 sources:
   - id: renderer
     resource: /src/index-cmd.ts

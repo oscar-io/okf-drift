@@ -6,6 +6,7 @@ description: "the workflow this repository follows when a document is created, a
 tags: [ reference, workflow, agent, index, log ]
 status: "stable"
 generated: { by: pi/opus-5, at: 2026-09-11T01:14:21Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T01:52:00Z }
 sources:
   - id: guide
     resource: /docs/design/authoring-guide.md
@@ -40,11 +41,11 @@ single person's notes.
 So this document is **one workflow, chosen by this repository**. Three separate voices get
 confused if they are not kept apart:
 
-| Layer | Force | Example |
-|---|---|---|
-| The spec | `MUST` / `MAY` | `type` is required; an index is optional |
-| `okf-drift` | an exit code | a catalogue must match the documents beside it |
-| This document | house rule | a delivered ticket is rewritten in the past tense |
+| Layer         | Force          | Example                                           |
+|---------------|----------------|---------------------------------------------------|
+| The spec      | `MUST` / `MAY` | `type` is required; an index is optional          |
+| `okf-drift`   | an exit code   | a catalogue must match the documents beside it    |
+| This document | house rule     | a delivered ticket is rewritten in the past tense |
 
 Only the first is binding on anybody. The third is binding *here*, and the imperative mood
 below is deliberate: an agent given a menu of options will pick differently on Tuesday than

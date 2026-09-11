@@ -57,6 +57,8 @@ These are directions. Nothing in them describes current behaviour.
 - [`product/tickets/DRIFT-0008.md`](product/tickets/DRIFT-0008.md) — rejected, and it will
   not be built here. The gap is real: a folder without front matter exits 2 and is called
   empty. The ticket names the tool it belongs to instead.
+- [`product/tickets/DRIFT-0009.md`](product/tickets/DRIFT-0009.md) — proposed, and visible
+  today: several stale findings in this bundle are reformatting, not change.
 - [`product/tickets/DRIFT-0007.md`](product/tickets/DRIFT-0007.md) — proposed, and it
   records a live defect: `no-index` fails a conformant bundle today.
 - [`product/tickets/DRIFT-0003.md`](product/tickets/DRIFT-0003.md) — deliberately open, and
