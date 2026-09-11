@@ -3,10 +3,10 @@
 type: "Feature Idea"
 title: "The git oracle"
 description: "compare a document against the code it cites, using history that already exists"
-tags: [backlog, feature-idea, drift, git]
+tags: [ backlog, feature-idea, drift, git ]
 status: "stable"
 implementation: "done"
-generated: { by: claude/opus-5, at: 2026-09-10T22:25:00Z }
+generated: { by: pi/opus-5, at: 2026-09-10T22:25:00Z }
 sources:
   - id: stub
     resource: /src/drift.ts
@@ -28,12 +28,12 @@ than in a wiki.
 
 ## Checks
 
-| Condition | Finding |
-|---|---|
-| `sources[].resource` changed since `last_modified` | `stale` |
-| `sources[].resource` changed since the newest `verified.at` | `stale` |
-| `sources[].resource` no longer exists | `gone` |
-| `stale_after` is in the past | `expired` |
+| Condition                                                   | Finding   |
+|-------------------------------------------------------------|-----------|
+| `sources[].resource` changed since `last_modified`          | `stale`   |
+| `sources[].resource` changed since the newest `verified.at` | `stale`   |
+| `sources[].resource` no longer exists                       | `gone`    |
+| `stale_after` is in the past                                | `expired` |
 
 The reference point is the later of `last_modified` and `verified.at`: a document
 reviewed after the code changed is not stale.

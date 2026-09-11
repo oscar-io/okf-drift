@@ -5,7 +5,7 @@ title: "Authoring guide"
 description: "the house style for OKF front matter, verifiers and logs, and which rules the tool enforces"
 tags: [reference, authoring, front-matter, house-style]
 status: "stable"
-generated: { by: claude/opus-5, at: 2026-09-11T00:20:00Z }
+generated: { by: pi/opus-5, at: 2026-09-11T00:20:00Z }
 sources:
   - id: spec
     resource: https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md
@@ -35,7 +35,7 @@ title: "The tool owns two sections of an index"
 description: "why generation is scoped to two headings instead of the whole file"
 tags: [decision, index, safety]
 status: "stable"
-generated: { by: claude/opus-5, at: 2026-09-11T00:20:00Z }
+generated: { by: pi/opus-5, at: 2026-09-11T00:20:00Z }
 sources:
   - id: implementation
     resource: /src/index-cmd.ts
@@ -77,7 +77,7 @@ An actor is one of three shapes, and never a display name:
 
 | Form | For | Example |
 |---|---|---|
-| `tool/version` | an agent or tool | `claude/opus-5` |
+| `tool/version` | an agent or tool | `pi/opus-5` |
 | `human:<handle>` | a person | `human:oscar-io` |
 | `process:<name>` | an automated check | `process:link-check` |
 

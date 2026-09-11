@@ -3,10 +3,10 @@
 type: "Feature Idea"
 title: "Conform to the spec's link and index rules"
 description: "four ways the index check contradicted OKF v0.2, found by reading the spec instead of the examples"
-tags: [backlog, feature-idea, conformance, index]
+tags: [ backlog, feature-idea, conformance, index ]
 status: "stable"
 implementation: "done"
-generated: { by: claude/opus-5, at: 2026-09-11T00:12:00Z }
+generated: { by: pi/opus-5, at: 2026-09-11T00:12:00Z }
 sources:
   - id: spec
     resource: https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md
@@ -31,11 +31,11 @@ specification rather than by using the tool. All four are fixed.
 reported as `dangling-entry` *and* the document it pointed at as `unlisted-document` — the
 spec's own index example produced five findings on a conformant bundle.
 
-| In an index | Was | Now |
-|---|---|---|
-| `[Customers](/tables/customers.md)` | `GONE` | resolved from the bundle root |
-| `[Other](./other.md)` | `GONE` | resolved relative to the directory |
-| `[Subdirectory](subdir/)` | `GONE` | a directory entry, §8 |
+| In an index                         | Was    | Now                                |
+|-------------------------------------|--------|------------------------------------|
+| `[Customers](/tables/customers.md)` | `GONE` | resolved from the bundle root      |
+| `[Other](./other.md)`               | `GONE` | resolved relative to the directory |
+| `[Subdirectory](subdir/)`           | `GONE` | a directory entry, §8              |
 
 `resolveTarget` turns a link into a bundle-relative path before anything is compared: a
 leading `/` is rooted at the bundle, everything else at the directory holding the index,

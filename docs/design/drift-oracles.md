@@ -3,9 +3,10 @@
 type: "Design Decision"
 title: "What the tool does when it cannot check"
 description: "why an unverifiable source is announced rather than passed or failed, and why git is one oracle rather than the oracle"
-tags: [decision, drift, git, safety]
+tags: [ decision, drift, git, safety ]
 status: "stable"
-generated: { by: claude/opus-5, at: 2026-09-11T00:45:00Z }
+generated: { by: pi/opus-5, at: 2026-09-11T00:45:00Z }
+verified: { by: "human:oscar-io", at: 2026-09-11T01:08:00Z }
 sources:
   - id: git
     resource: /src/git.ts
@@ -48,12 +49,12 @@ The reference point for staleness is whatever is known to be current. Git is the
 available when a document cites code, because history is already there and needs no
 bookkeeping. It is not the only one:
 
-| Source cited | Oracle |
-|---|---|
-| a file in a git repository | `git log` — implemented |
-| a file with no history | the filesystem: does it still exist |
-| a URL | none today; fetching is out of scope |
-| `stale_after` | the clock, which needs nothing |
+| Source cited               | Oracle                               |
+|----------------------------|--------------------------------------|
+| a file in a git repository | `git log` — implemented              |
+| a file with no history     | the filesystem: does it still exist  |
+| a URL                      | none today; fetching is out of scope |
+| `stale_after`              | the clock, which needs nothing       |
 
 So a bundle outside git is not unverifiable, only less verifiable. **`missing-source` and
 `expired` work with no git at all**, and a vault of notes citing other notes gets a real
@@ -61,13 +62,13 @@ answer: the thing this document points at is gone.
 
 ## Per-source outcomes
 
-| Source | Behaviour |
-|---|---|
-| tracked, changed since `last_modified` or the newest `verified.at` | `stale-source` |
-| tracked, unchanged | pass |
-| exists but untracked | skipped, counted in the summary |
-| does not exist | `missing-source` |
-| a URL, or a path outside the bundle's repository | skipped, counted |
+| Source                                                             | Behaviour                       |
+|--------------------------------------------------------------------|---------------------------------|
+| tracked, changed since `last_modified` or the newest `verified.at` | `stale-source`                  |
+| tracked, unchanged                                                 | pass                            |
+| exists but untracked                                               | skipped, counted in the summary |
+| does not exist                                                     | `missing-source`                |
+| a URL, or a path outside the bundle's repository                   | skipped, counted                |
 
 ## What was rejected
 

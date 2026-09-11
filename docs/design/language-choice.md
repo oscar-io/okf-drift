@@ -5,7 +5,7 @@ title: "TypeScript, over Go and Python"
 description: "why a tool that should not care what language a project uses is written in TypeScript anyway"
 tags: [decision, tooling, distribution]
 status: "stable"
-generated: { by: claude/opus-5, at: 2026-09-10T22:15:54Z }
+generated: { by: pi/opus-5, at: 2026-09-10T22:15:54Z }
 verified: { by: "human:oscar-io", at: 2026-09-10T22:18:00Z }
 sources:
   - id: package

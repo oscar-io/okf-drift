@@ -3,10 +3,10 @@
 type: "Feature Idea"
 title: "Decide whether a terser catalogue summary is drift"
 description: "whether a deliberately shorter description in an index is good editing or a copy that has rotted"
-tags: [backlog, feature-idea, index, open-question]
+tags: [ backlog, feature-idea, index, open-question ]
 status: "draft"
 implementation: "partial"
-generated: { by: claude/opus-5, at: 2026-09-10T22:25:00Z }
+generated: { by: pi/opus-5, at: 2026-09-10T22:25:00Z }
 sources:
   - id: decision
     resource: /docs/design/index-command.md
@@ -22,10 +22,10 @@ sources:
 `description`, after normalising away case, punctuation and whitespace. That handles
 formatting. It does not handle intent:
 
-| Catalogue | Document | Should it fire? |
-|---|---|---|
-| `caching, per tenant` | `why prices are cached per-tenant` | probably not |
-| `how the retry queue works` | `why prices are cached per-tenant` | yes |
+| Catalogue                   | Document                           | Should it fire? |
+|-----------------------------|------------------------------------|-----------------|
+| `caching, per tenant`       | `why prices are cached per-tenant` | probably not    |
+| `how the retry queue works` | `why prices are cached per-tenant` | yes             |
 
 The first is someone writing a shorter summary because a list reads differently from a
 document header. That is good editing, and the tool currently calls it drift.
