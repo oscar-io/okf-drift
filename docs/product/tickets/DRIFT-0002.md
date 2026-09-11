@@ -4,8 +4,8 @@ type: "Feature Idea"
 title: "The git oracle"
 description: "compare a document against the code it cites, using history that already exists"
 tags: [backlog, feature-idea, drift, git]
-status: "draft"
-implementation: "partial"
+status: "stable"
+implementation: "done"
 generated: { by: claude-opus-5, at: 2026-09-10T22:25:00Z }
 sources:
   - id: stub
@@ -18,8 +18,8 @@ sources:
 
 `DRIFT-0002`
 
-The reason the tool is called `okf-drift` and not `okf-index`. `src/drift.ts` exists,
-documents the plan, and throws.
+The reason the tool is called `okf-drift` and not `okf-index`. Implemented in
+`src/drift.ts`, on top of `src/git.ts`.
 
 A document is rarely wrong because it is malformed. It is wrong because the thing it
 describes moved. Git already knows when that happened, so detecting it needs no extra
@@ -50,6 +50,10 @@ finding should nag about it, is open.
 
 ## Notes
 
-Shell out with `execFileSync`. The surface needed is `rev-parse`, `ls-files` and `log`,
-which is not worth a dependency. Report cleanly when the bundle is not in a repository
-at all, rather than throwing.
+Shelled out with `execFileSync`: the surface needed is `rev-parse`, `ls-files` and `log`,
+which is not worth a dependency. What happens when git cannot answer became its own
+decision, [`drift-oracles.md`](../../design/drift-oracles.md), because a checker that
+silently verifies nothing is worse than one that fails.
+
+One thing git cannot do: `--since` is second-granular and inclusive, so "after this exact
+moment" is compared in JS instead.

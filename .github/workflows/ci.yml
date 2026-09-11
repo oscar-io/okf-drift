@@ -43,3 +43,6 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm docs:check
+      # Not gating yet: this repository's own documents legitimately trail its
+      # code while the tool is being built. Turn into a gate once they do not.
+      - run: pnpm docs:drift || true

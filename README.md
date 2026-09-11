@@ -63,10 +63,38 @@ things, and each is a command:
 | Command | Compares | Against |
 |---|---|---|
 | `okf-drift index` | catalogues (`index.md`) | the documents beside them |
-| `okf-drift` | documents | the code, via git history |
+| `okf-drift check` | documents | the code, via git history |
 
-The second one is not implemented yet. See
-[`docs/design/`](docs/design/index.md) for where it is going.
+### `okf-drift check`
+
+```
+$ okf-drift check docs
+
+  STALE      design/index-command.md
+             /src/index-cmd.ts changed 2026-09-11, 3 commits after this document was last reviewed
+             reviewed 2026-09-10, source changed 2026-09-11
+
+  GONE       design/queue.md
+             /src/queue/worker.ts no longer exists
+
+1 of 12 documents need review.
+  13 sources compared against git history.
+```
+
+| Finding | Means |
+|---|---|
+| `stale-source` | cited code changed after `sources[].last_modified` |
+| `unverified-since-change` | cited code changed after the newest `verified.at` |
+| `missing-source` | a cited file is gone |
+| `expired` | `stale_after` is in the past |
+
+A document reviewed *after* the code changed is not stale, so re-reading one and adding a
+`verified` entry silences it honestly.
+
+**Without git it still works, and says so.** A bundle in a tarball or an Obsidian vault is
+checked as far as it can be — a missing citation is still a missing citation — and the
+report names what it could not verify rather than passing silently. Use `--require-git`
+where the check must actually have happened.
 
 ### `okf-drift index`
 

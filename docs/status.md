@@ -39,6 +39,8 @@ These describe behaviour you can run.
 - [`design/language-choice.md`](design/language-choice.md) — decided and acted on.
 - [`design/distribution.md`](design/distribution.md) — decided; the git-install route is
   the only one, and nothing is published.
+- [`design/drift-oracles.md`](design/drift-oracles.md) — implemented, including
+  `--require-git` and the printed summary of what could not be checked.
 
 ## Decided but not built (`design/pending`)
 
@@ -52,8 +54,6 @@ These are directions. Nothing in them describes current behaviour.
 
 - [`product/tickets/DRIFT-0001.md`](product/tickets/DRIFT-0001.md) — proposed. A malformed
   `verified` block is still discarded silently today.
-- [`product/tickets/DRIFT-0002.md`](product/tickets/DRIFT-0002.md) — partial: `src/drift.ts`
-  documents the plan and throws. **The default `okf-drift` command does not work.**
 - [`product/tickets/DRIFT-0003.md`](product/tickets/DRIFT-0003.md) — deliberately open, and
   should stay open until a larger bundle provides evidence.
 - [`product/tickets/DRIFT-0004.md`](product/tickets/DRIFT-0004.md) — proposed; the two
@@ -64,6 +64,8 @@ These are directions. Nothing in them describes current behaviour.
 
 ## Done (`historical`)
 
+- [`product/tickets/DRIFT-0002.md`](product/tickets/DRIFT-0002.md) — done. The git oracle
+  works, and its plan is deleted.
 - [`product/tickets/DRIFT-0006.md`](product/tickets/DRIFT-0006.md) — done. Kept because it
   records four spec violations and how they were found, which is worth more than the fix.
 
@@ -74,16 +76,15 @@ These are directions. Nothing in them describes current behaviour.
 | `okf-drift index --check <bundle>` | works |
 | `okf-drift index --write <bundle>` | works; refuses what it cannot reproduce |
 | `okf-drift index --strict` | works |
-| `okf-drift check <bundle>` (the default) | **throws**, see `DRIFT-0002` |
+| `okf-drift check <bundle>` (the default) | works |
+| `okf-drift check --require-git` | works |
 
 Findings emitted today: `unlisted-document`, `dangling-entry`, `description-drift`,
-`undescribed-document`, `invalid-description`, `no-index`, `unreadable`, `write-refused`.
+`undescribed-document`, `invalid-description`, `no-index`, `unreadable`, `write-refused`,
+`stale-source`, `unverified-since-change`, `missing-source`, `expired`.
 
-Not yet emitted, though named in tickets: `malformed-verified`, `stale-source`,
-`missing-source`, `expired`.
+Not yet emitted, though named in a ticket: `malformed-verified`.
 
 ## Known inaccuracy
 
-`src/drift.ts` points a reader at `docs/design/drift-detection.md`, which does not exist —
-the decision it names lives in [`product/tickets/DRIFT-0002.md`](product/tickets/DRIFT-0002.md).
-Fix when the oracle lands.
+None recorded. The dangling `docs/design/drift-detection.md` reference went with the stub.

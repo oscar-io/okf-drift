@@ -21,6 +21,7 @@ Options
   --write        with 'index', fix instead of report
   --check        explicit form of the default reporting behaviour
   --strict       compare descriptions exactly, not just by meaning
+  --require-git  fail if drift cannot be checked, instead of saying so
   -h, --help     this text
   -v, --version  print the version
 
@@ -32,12 +33,21 @@ interface Args {
   bundle: string
   write: boolean
   strict: boolean
+  requireGit: boolean
   help: boolean
   version: boolean
 }
 
 export function parseArgs(argv: string[]): Args {
-  const args: Args = { command: 'check', bundle: 'docs', write: false, strict: false, help: false, version: false }
+  const args: Args = {
+    command: 'check',
+    bundle: 'docs',
+    write: false,
+    strict: false,
+    requireGit: false,
+    help: false,
+    version: false,
+  }
   const positional: string[] = []
 
   for (const arg of argv) {
@@ -46,6 +56,7 @@ export function parseArgs(argv: string[]): Args {
     else if (arg === '--write') args.write = true
     else if (arg === '--check') args.write = false
     else if (arg === '--strict') args.strict = true
+    else if (arg === '--require-git') args.requireGit = true
     else if (arg.startsWith('-')) throw new Error(`unknown option: ${arg}`)
     else positional.push(arg)
   }
@@ -104,14 +115,29 @@ export function main(argv: string[]): number {
     return result.findings.length > 0 ? 1 : 0
   }
 
-  try {
-    const result = checkDrift(bundle)
-    process.stdout.write(`${formatReport(result.findings, result.checked, 'document')}\n`)
-    return result.findings.length > 0 ? 1 : 0
-  } catch (error) {
-    process.stderr.write(`okf-drift: ${(error as Error).message}\n`)
+  const result = checkDrift(bundle)
+
+  if (args.requireGit && result.repo === null) {
+    process.stderr.write(`okf-drift: ${args.bundle} is not in a git repository, and --require-git was given\n`)
     return 2
   }
+
+  process.stdout.write(`${formatReport(result.findings, result.checked, 'document')}\n`)
+
+  // What could not be checked is part of the report, never a silent pass: a
+  // green exit that verified nothing is the most expensive answer a checker
+  // can give. See docs/design/drift-oracles.md.
+  if (result.repo === null) {
+    process.stdout.write(`\n  ${args.bundle} is not in a git repository, so drift against code was not checked.\n`)
+  }
+  for (const { reason, count } of result.skipped) {
+    process.stdout.write(`  ${count} source${count === 1 ? '' : 's'} skipped: ${reason}.\n`)
+  }
+  if (result.verified > 0) {
+    process.stdout.write(`  ${result.verified} source${result.verified === 1 ? '' : 's'} compared against git history.\n`)
+  }
+
+  return result.findings.length > 0 ? 1 : 0
 }
 
 process.exitCode = main(process.argv.slice(2))

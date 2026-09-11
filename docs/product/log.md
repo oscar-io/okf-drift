@@ -4,6 +4,9 @@ Why the backlog changed. Newest first.
 
 ## 2026-09-11
 
+- **Update** [DRIFT-0002](./tickets/DRIFT-0002.md) is done: the git oracle reports documents
+  whose cited code moved after they were written or reviewed.
+
 - **Update** [DRIFT-0006](./tickets/DRIFT-0006.md) is done: link targets resolve to paths, so
   the spec's own index example no longer reports five findings on a conformant bundle.
 

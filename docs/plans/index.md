@@ -1,5 +1,8 @@
 # plans: index
 
+Working plans, deleted once the work lands. Anything worth keeping moves into a decision
+record first.
+
 ## Documents
 
-- [`git-oracle.md`](git-oracle.md) - the working plan for DRIFT-0002, in the order the pieces should land.
+_None open._

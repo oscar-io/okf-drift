@@ -4,6 +4,9 @@ Why the decisions in this directory changed. Newest first.
 
 ## 2026-09-11
 
+- **Creation** [drift-oracles.md](./drift-oracles.md) makes "I could not check this" a third
+  outcome, because a checker that silently verifies nothing is worse than one that fails.
+
 - **Creation** [authoring-guide.md](./authoring-guide.md) collects the house style out of
   `AGENTS.md`, so rules the tool enforces can cite the code that enforces them.
 

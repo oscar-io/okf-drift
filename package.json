@@ -39,6 +39,7 @@
     "test:watch": "vitest",
     "type-check": "tsc --noEmit",
     "docs:check": "tsx src/cli.ts index --check docs",
+    "docs:drift": "tsx src/cli.ts check docs",
     "docs:write": "tsx src/cli.ts index --write docs",
     "prepare": "npm run build"
   },

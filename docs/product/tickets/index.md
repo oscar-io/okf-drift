@@ -20,7 +20,7 @@ A ticket says what an idea *is*. It does not say when it will be done.
 | Id | Title | Implementation |
 |---|---|---|
 | [`DRIFT-0001`](DRIFT-0001.md) | Report a malformed `verified` block | proposed |
-| [`DRIFT-0002`](DRIFT-0002.md) | The git oracle | partial |
+| [`DRIFT-0002`](DRIFT-0002.md) | The git oracle | done |
 | [`DRIFT-0003`](DRIFT-0003.md) | Decide whether a terser catalogue summary is drift | proposed |
 | [`DRIFT-0004`](DRIFT-0004.md) | Configurable index section headings | proposed |
 | [`DRIFT-0005`](DRIFT-0005.md) | Regenerate a section in the shape it already has | proposed |
